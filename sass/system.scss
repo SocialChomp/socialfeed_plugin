@@ -1,0 +1,87 @@
+@import 'system/vars';
+@import 'system/general';
+@import 'system/text'; 
+@import 'system/section';
+html,body {
+    -ms-touch-action: none;
+}
+body,html{height:100%;}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+//BASIC BLOCK/POS
+body{
+ background: #145D7A; 
+}
+header{
+  text-align:center;
+  color:white;
+ display:block;
+  position:absolute;
+  top:0px;right:0px;left:0px;
+  height:90px;
+  background:#2f2f2f;
+  margin-bottom:10px;
+  div{text-align:center;}
+  a{color:white;}
+  a span{margin-left:5px;margin-right:5px;}
+}
+.container{
+ margin-top:100px; 
+}
+.holdMap {
+    position: relative;
+margin-top: 150px;
+width: 400px;
+height: 400px;
+
+}
+canvas{position: relative; }
+.overlay{
+  background:url('../images/overlay.png');
+  display: block;
+  width:553px;
+  height:511px;
+  position: absolute;
+  top: -63px;
+  left: -75px;
+  z-index: 1;
+}
+/*-----------------------------MAIN VIEW---------------------------------*/
+
+.container{
+    @include make-responsive-grid(
+        $gridColumns: 12,
+        $gridColumnWidth: 59px,
+        $gridGutterWidth: 27px,
+        $columnname:span,
+        $rowname:row,
+        $mobileP:320px,
+        $mobileL:959px,
+        $tabletP:960px,
+        $tabletL:1024px
+    );
+    .wrapper{padding:10px;}
+    @import 'system/header'; 
+    @import 'system/section';
+    @import 'system/buttons';
+    @import 'system/form';
+    margin:0 auto; 
+}
+//iPhone
+@media screen and (max-width :959px) {
+    @import 'system/iphone';
+}
+//iPAD
+@media (min-width:960px) and (max-width:1024px){
+    @import 'system/ipad';
+}
+//LARGE SCREEN
+@media(min-width:1025px){
+    width:1280px;  
+}
+/*-----------------------------MAIN VIEW---------------------------------*/

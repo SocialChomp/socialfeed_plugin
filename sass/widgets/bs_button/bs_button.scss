@@ -1,0 +1,52 @@
+@mixin createButton($border: true, $color: #dddddd,$bgcolor: #eee,$bgcolorhover: #eee, $colorhover: #dddddd){
+    a,p,strong,em,h1,h2,h3,h4,h5{display:inline;position:relative;font-family:'Open-Sans',sans-serif;font-weight:bold;font-style: italic;} 
+    vertical-align: middle;
+    color:$color;
+    text-align:center;
+    padding:10px 25px;
+    @include border-radius(25px);
+    background:$bgcolor;
+    @if $border{
+        border:2px solid $color;  
+        @include drop-shadow(0,1px,1px,0px,0.15);
+    }
+    text-decoration:none;
+    .btn i[class*="icon-"]:before{padding-right:5px;}
+    .btn i[class*="ast-"]:before{padding-right:5px;}
+    &:hover{
+        text-decoration:none;
+        @include drop-shadow(0,1px,1px,0px,0.15);
+        background:$bgcolorhover;
+        color:$colorhover;
+    }
+    &:active,.active{
+        @include inner-shadow (0px,2px,3px,0, .25);
+        background:$bgcolorhover;
+    }
+}
+
+@mixin make-button-grid($gridColumns: 10,$gridColumnWidth: 5px,$gridGutterWidth: 29px,$columnname:btn){
+    @for $i from 1 through $gridColumns {
+        .#{$columnname}#{$i}{
+            width: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1)) - $gridGutterWidth;
+                }
+    }
+    [class*='#{$columnname}'] {
+        min-height: 1px; // prevent collapsing columns
+        position:relative;
+    }
+}
+@mixin make-button-gridFluid($gridColumns: 24,$gridMinWidth: 50px,$gridWidth: 200px,$columnname:btnFluid-){
+    
+    @for $i from 1 through $gridColumns {
+        .#{$columnname}#{$i}{
+            min-width: $gridMinWidth;
+            max-width: $gridWidth;
+            width: (($i/$gridColumns)*100%);
+                }
+    }
+    [class*='#{$columnname}'] {
+        min-height: 1px; // prevent collapsing columns
+        position:relative;
+    }
+}

@@ -1,0 +1,45 @@
+.createBtn(@color: #dddddd,@bgcolor: #eee){
+p,strong,em,h1,h2,h3,h4,h5{display:inline;position:relative;font-family:'Open-Sans',sans-serif;font-weight:bold;} 
+text-shadow: rgba(0,0,0,0.5) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.5) 0 1px;
+
+vertical-align: middle;
+color:@color;
+text-align:center;
+padding:10px 5px;
+.border-radius(10px);
+background:@bgcolor;
+border:none;
+.drop-shadow(0,1px,1px,0px,0.15);
+text-decoration:none;
+.btn i[class*="icon-"]:before{padding-right:5px;}
+ &:hover{
+ text-decoration:none;
+ .drop-shadow(0,1px,1px,0px,0.15);
+ background:darken(@bgcolor,10%);
+ }
+&:active,.active{
+    .inner-shadow (0px,2px,3px,0, .25);
+    background:darken(@bgcolor,5%);
+}
+}
+.make-button-grid(@gridColumns: 10,@gridColumnWidth: 5px,@gridGutterWidth: 29px,@columnname:btn){
+@counterbase: (@gridColumns + 1);
+.loopGrid(@index) when (@index > 0){
+    @counterbase: (@index + 1);
+        @media screen and (max-width :500px) {
+          .@{columnname}@{counter}{
+	        width: (@gridColumnWidth/1.3 * @index) + (@gridGutterWidth/1.3 * (@index - 1)) - @gridGutterWidth/1.3!important;
+	    }  
+        }
+	    .@{columnname}@{counter}{
+	        width: (@gridColumnWidth * @index) + (@gridGutterWidth * (@index - 1)) - @gridGutterWidth;
+	    }
+	    @counter: (@counterbase - 1);
+	    .loopGrid(@index - 1);
+    }
+     [class*='@{columnname}'] {
+             min-height: 1px; // prevent collapsing columns
+             position:relative;
+    }
+    .loopGrid(@gridColumns);
+}

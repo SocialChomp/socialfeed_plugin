@@ -1,0 +1,126 @@
+@mixin clearfix() {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: "";
+    }
+    &:after {
+        clear: both;
+    }
+} 
+//scss grid system for FIXED Grids
+//$gridColumns: 12, number of column to make
+//$gridColumnWidth: 59px, min width of the column
+//$gridGutterWidth: 29px, width of the gutter
+//$columnname:span, name of the class that controls the columns
+//$rowname:row name of the class to seperate the rows
+@mixin make-flat-grid($gridColumns: 12,$gridColumnWidth: 59px,$gridGutterWidth: 29px,$columnname:span,$rowname:row
+    ){
+        width: ($gridColumnWidth * $gridColumns) + ($gridGutterWidth * $gridColumns);
+        @for $i from 1 through $gridColumns {
+            .#{$columnname}#{$i}{
+                width: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1)) - $gridGutterWidth;   
+                    }
+        }//end loop
+        [class*='#{$columnname}'] {
+            float: left;
+            min-height: 1px; // prevent collapsing columns
+            //margin-left: @gridGutterWidth;
+            position:relative;
+        }
+        [class*='#{$columnname}']:first-child{
+            margin-left: 0;
+        }
+        .#{$rowname} {
+            position:relative;
+            @include clearfix();
+            margin-top:20px;
+        }
+        .#{$rowname}:first-child {
+            margin-top:0px;
+        } 
+    }//end mixin
+
+//scss grid system for RESPONSIVE FIXED Grids
+//$gridColumns: 12, number of column to make
+//$gridColumnWidth: 59px, min width of the column
+//$gridGutterWidth: 29px, width of the gutter
+//$columnname:span, name of the class that controls the columns
+//$rowname:row name of the class to seperate the rows
+@mixin make-responsive-grid($gridColumns: 12,$gridColumnWidth: 59px,$gridGutterWidth: 29px,$columnname:span,$rowname:row,$mobileP:320px,$mobileL:768,$tabletP:968px,$tabletL:1024px){
+    $currentSpace:($gridColumnWidth * $gridColumns) + ($gridGutterWidth * $gridColumns);
+    width: ($gridColumnWidth * $gridColumns) + ($gridGutterWidth * $gridColumns);
+    @for $i from 1 through $gridColumns {
+        .#{$columnname}#{$i}{
+            width: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1)) - $gridGutterWidth;
+        }
+        //START MOBILE DEVICES
+        // Smartphones (portrait and landscape) -----------
+        @media screen and (max-width :$mobileL) {
+            .#{$columnname}#{$i}{
+                width: 100%;
+                margin-left: 0px;
+            }   
+        }
+
+        // iPads (portrait and landscape) -----------
+        @media (min-width:$tabletP) and (max-width:$tabletL){
+            .#{$columnname}#{$i}{
+                width: (($gridColumnWidth * $i) + (($gridGutterWidth*.8) * ($i - 1)) - $gridGutterWidth)*.8;
+            }
+        }
+    }
+    [class*='#{$columnname}'] {
+        float: left;
+        min-height: 1px; // prevent collapsing columns
+        margin-left: $gridGutterWidth;
+        @include transition(width .3s ease-in-out);
+    }
+    [class*='#{$columnname}']:first-child{
+        margin-left: 0;
+    }
+    .#{$rowname} {
+        position:relative;
+        @include transition(width .3s ease-in-out);
+        @include clearfix();
+        margin-top:20px;
+    }
+    .#{$rowname} {
+        margin-top:0px;
+    } 
+}
+
+//scss grid system for FLUID Grids
+//$gridColumns: 12, number of column to make
+//$gridMinWidth: 970px; min width of the body
+//$gridWidth: 1200px, width of the gutter
+//$columnname:span, name of the class that controls the columns
+//$rowname:row name of the class to seperate the rows
+@mixin make-fluid-grid($gridColumns: 12,$gridMinWidth: 970px,$gridWidth: 1200px,$columnname:span,$rowname:row){
+    min-width: $gridMinWidth;
+    max-width: $gridWidth;
+    width:100%;
+        @for $i from 1 through $gridColumns {
+            .#{$columnname}#{$i}{
+                width: (($i/$gridColumns)*100%);   
+                    }
+        }//end loop
+        [class*='#{$columnname}'] {
+            float: left;
+            min-height: 1px; // prevent collapsing columns
+            //margin-left: @gridGutterWidth;
+            position:relative;
+        }
+        [class*='#{$columnname}']:first-child{
+            margin-left: 0;
+        }
+        .#{$rowname} {
+            position:relative;
+            @include clearfix();
+            margin-top:20px;
+        }
+        .#{$rowname}:first-child {
+            margin-top:0px;
+        } 
+    }//end mixin

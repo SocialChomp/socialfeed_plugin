@@ -1,0 +1,98 @@
+.clearfix() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+} 
+//FLAT
+.make-flat-grid(@gridColumns: 12,@gridColumnWidth: 59px,@gridGutterWidth: 29px,@columnname:span,@rowname:row){
+width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * @gridColumns);
+@counterbase: (@gridColumns + 1);
+.loopGrid(@index) when (@index > 0){
+    @counterbase: (@index + 1);
+	    .@{columnname}@{counter}{
+	        width: (@gridColumnWidth * @index) + (@gridGutterWidth * (@index - 1)) - @gridGutterWidth;
+	    }
+	    @counter: (@counterbase - 1);
+	    .loopGrid(@index - 1);
+    }
+     [class*='@{columnname}'] {
+            float: left;
+             min-height: 1px; // prevent collapsing columns
+             //margin-left: @gridGutterWidth;
+             position:relative;
+    }
+    [class*='@{columnname}']:first-child{
+         margin-left: 0;
+    }
+    .@{rowname} {
+            position:relative;
+            .clearfix();
+            margin-top:20px;
+    }
+    .@{rowname} {
+            margin-top:0px;
+    } 
+    .loopGrid(@gridColumns);
+}
+//RESPONSIVE
+.make-responsive-grid(@gridColumns: 12,@gridColumnWidth: 59px,@gridGutterWidth: 29px,@columnname:span,@rowname:row,@mobile:320px,@tablet:768px){
+@desktop:(@gridColumnWidth * @gridColumns) + (@gridGutterWidth * @gridColumns);
+//width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * @gridColumns);
+@counterbase: (@gridColumns + 1);
+.loopGrid(@index) when (@index > 0){
+    @counterbase: (@index + 1);
+	    .@{columnname}@{counter}{
+	        width: (@gridColumnWidth * @index) + (@gridGutterWidth * (@index - 1)) - @gridGutterWidth;
+	    }
+	    //START MOBILE DEVICES
+	    /* Smartphones (portrait and landscape) ----------- */
+@media screen and (max-width :@mobile) {
+ .@{columnname}@{counter}{
+	         width: 100%;
+                margin-left: 0px;
+	    }   
+}
+@media (min-width:@mobile) and (max-width:767px){
+.@{columnname}@{counter}{
+	        width: 100%;
+            margin-left: 0px;
+	    }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media (min-width:@tablet) and (max-width:1024px){
+.@{columnname}@{counter}{
+	        width: ((@gridColumnWidth * @index) + ((@gridGutterWidth*.8) * (@index - 1)) - @gridGutterWidth)*.8;
+	    }
+}
+
+	    //END MOBILE DEVICES
+	    @counter: (@counterbase - 1);
+	    .loopGrid(@index - 1);
+    }
+     [class*='@{columnname}'] {
+            float: left;
+             min-height: 1px; // prevent collapsing columns
+             margin-left: @gridGutterWidth;
+        .transition(width .3s ease-in-out);
+    }
+    [class*='@{columnname}']:first-child{
+         margin-left: 0;
+    }
+    .@{rowname} {
+            position:relative;
+        .transition(width .3s ease-in-out);
+            .clearfix();
+            margin-top:20px;
+    }
+    .@{rowname} {
+            margin-top:0px;
+    } 
+    .loopGrid(@gridColumns);
+}

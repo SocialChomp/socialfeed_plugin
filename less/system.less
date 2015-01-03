@@ -1,0 +1,46 @@
+@import 'system/vars.less';
+@import 'system/general.less';
+@import 'system/text.less'; 
+html,body {
+	-ms-touch-action: none;
+}
+body,html{height:100%;}
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+//BASIC BLOCK/POS
+/*-----------------------------MAIN VIEW---------------------------------*/
+.container{
+    .make-responsive-grid(
+    @gridColumns: 12,
+    @gridColumnWidth: 59px,
+    @gridGutterWidth: 27px,
+    @columnname:span,
+    @rowname:row,
+    @mobile:320px,
+    @tablet:768px
+    );
+    .wrapper{padding:10px;}    
+    @import 'system/header.less'; 
+    @import 'system/section.less';
+    @import 'system/buttons.less';
+    @import 'system/form.less';
+    margin:0 auto; 
+}
+//iPhone
+@media screen and (max-width :767px) {
+    @import 'system/iphone.less';
+}
+//iPAD
+@media (min-width:768px) and (max-width:1024px){
+    @import 'system/ipad.less';
+}
+//LARGE SCREEN
+@media(min-width:1025px){
+     width:1280px;  
+}
+/*-----------------------------MAIN VIEW---------------------------------*/
+

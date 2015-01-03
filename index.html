@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable = no"><!--fixes Ipad issues when rotating-->
+    <meta property="og:image" content="images/favicon"/>
+    <title>THE Index</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"><!--font-icons if needed-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/core.scss.css" type="text/css" media="screen"><!--rename to core.less.css or core.scss.css depending on the preprocessor-->
+</head>
+
+<body>
+    <header>
+      <p>Spinning Globe</p>    
+    </header><!--header-->
+    <div class="container">
+        <div class="wrapper">
+            <div class="holdMap">
+                <div class="menu baltimore">
+                    <a href="http://www.ptana.org/"><i class="fa fa-map-marker fa-2x"></i></a>
+                    <!--<div class="menu-container">
+                        <p>Chapters</p>
+                        <ul>
+                            <li><a href="#">Atlanta Chapter</a></li>
+                            <li><a href="#">Hampton Roads</a></li>
+                            <li><a href="#">Maryland Chapter</a></li>
+                            <li><a href="#">New England Chapter</a></li>
+                        </ul>
+                    </div>-->
+                </div>
+                <div class="menu detroit">
+                    <a href="http://www.ptana.org/"><i class="fa fa-map-marker fa-2x"></i></a>
+                    <!--<div class="menu-container">
+                        <p>Chapters</p>
+                        <ul>
+                            <li><a href="#">Atlanta Chapter</a></li>
+                            <li><a href="#">Hampton Roads</a></li>
+                            <li><a href="#">Maryland Chapter</a></li>
+                            <li><a href="#">New England Chapter</a></li>
+                        </ul>
+                    </div>-->
+                </div>
+                <div class="overlay"></div>
+                <canvas id='basicGlobe' width='400' height='400'></canvas>
+                <h1>PTANA</h1>
+                <h2>Professional Travel Agents of North America</h2>
+                <h2 class="small">Promoting Domestic and International Travel</h2>
+            </div>
+        </div><!--wrapper-->
+    </div><!--container-->
+    
+    <!--HTML SCRIPTS-->
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script data-main="scripts/main" src="js/modernizr.js"></script>
+    <script data-main="js/core" src="js/require.js"></script>
+    <!--END HTML SCRIPTS-->
+</body>
+</html>
