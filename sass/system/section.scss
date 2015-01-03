@@ -5,7 +5,7 @@
 		top: 36px;
 		right: -440px;
 		font-weight: bold;
-		color: white;
+		color: #003895;
 		font-size: 118px;
 	}
 	h2{
@@ -13,7 +13,7 @@
 		top: 155px;
 		right: -520px;
 		font-weight: bold;
-		color: white;
+		color: #003895;
 		font-size: 20px;
 		&.small{
 			font-size: 15px;
@@ -22,22 +22,22 @@
 		}
 	}
 .menu{
-color:white;
+color:#c12b34;
 	position: absolute;
 	z-index: 5;
 	a{display: block; width:100%; height:100%;}
-	&.baltimore{
-		top: 20px;
+	&.detroit{
+		top: 40px;
 		left: 225px;
 
 	}
-	&.detroit{
+	&.baltimore{
 		top: 48px;
 		left: 246px;
 	}
 	opacity: 0;
 }
-i{position: relative; z-index: 3; color:#0C4663;}
+i{position: relative; z-index: 3; color:#c12b34;}
 .menu-container{
 	position: absolute;
 	top: 7px;

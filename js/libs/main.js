@@ -36,9 +36,9 @@ define(function (require) {
 		  // but we need to specify the path to the `world-110m.json` file.
 		  planet.loadPlugin(planetaryjs.plugins.earth({
 		    topojson: { file: 'js/libs/planetaryjs/world-110m.json' },
-		     oceans:   { fill: '#dbdbdb' },
-  			 land:     { fill: '#408BA8', stroke: '#145D7A' },
-  			 borders:  { stroke: '#408BA8' }
+		     oceans:   { fill: '#003895' },
+  			 land:     { fill: '#dbdbdb', stroke: '#17315c' },
+  			 borders:  { stroke: '#cbcbcb' }
 		  }));
 
 		  // Scale the planet's radius to half the canvas' size

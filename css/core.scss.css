@@ -88,21 +88,21 @@ table {
     top: 36px;
     right: -440px;
     font-weight: bold;
-    color: white;
+    color: #003895;
     font-size: 118px; }
   .holdMap h2 {
     position: absolute;
     top: 155px;
     right: -520px;
     font-weight: bold;
-    color: white;
+    color: #003895;
     font-size: 20px; }
     .holdMap h2.small {
       font-size: 15px;
       top: 185px;
       right: -420px; }
   .holdMap .menu {
-    color: white;
+    color: #c12b34;
     position: absolute;
     z-index: 5;
     opacity: 0; }
@@ -110,16 +110,16 @@ table {
       display: block;
       width: 100%;
       height: 100%; }
-    .holdMap .menu.baltimore {
-      top: 20px;
-      left: 225px; }
     .holdMap .menu.detroit {
+      top: 40px;
+      left: 225px; }
+    .holdMap .menu.baltimore {
       top: 48px;
       left: 246px; }
   .holdMap i {
     position: relative;
     z-index: 3;
-    color: #0C4663; }
+    color: #c12b34; }
   .holdMap .menu-container {
     position: absolute;
     top: 7px;
@@ -347,7 +347,7 @@ body, html {
   box-sizing: border-box; }
 
 body {
-  background: #145D7A; }
+  background: white; }
 
 header {
   text-align: center;
@@ -537,21 +537,21 @@ canvas {
       top: 36px;
       right: -440px;
       font-weight: bold;
-      color: white;
+      color: #003895;
       font-size: 118px; }
     .container .holdMap h2 {
       position: absolute;
       top: 155px;
       right: -520px;
       font-weight: bold;
-      color: white;
+      color: #003895;
       font-size: 20px; }
       .container .holdMap h2.small {
         font-size: 15px;
         top: 185px;
         right: -420px; }
     .container .holdMap .menu {
-      color: white;
+      color: #c12b34;
       position: absolute;
       z-index: 5;
       opacity: 0; }
@@ -559,16 +559,16 @@ canvas {
         display: block;
         width: 100%;
         height: 100%; }
-      .container .holdMap .menu.baltimore {
-        top: 20px;
-        left: 225px; }
       .container .holdMap .menu.detroit {
+        top: 40px;
+        left: 225px; }
+      .container .holdMap .menu.baltimore {
         top: 48px;
         left: 246px; }
     .container .holdMap i {
       position: relative;
       z-index: 3;
-      color: #0C4663; }
+      color: #c12b34; }
     .container .holdMap .menu-container {
       position: absolute;
       top: 7px;
