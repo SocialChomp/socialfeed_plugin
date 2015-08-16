@@ -215,7 +215,7 @@ var scFeed = function(method){
 			         		}
 			         		$('.feed.light .wrapper').append(feeder());
 			         		$(".scfeed .wrapper").freetile();
-			            	if(json.length<25){
+			            	if(json.items.length<25){
 			            		privacy.settings.lastPage = true;
 			            	}
 			            }
