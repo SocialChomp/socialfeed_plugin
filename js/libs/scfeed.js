@@ -214,6 +214,9 @@ var scFeed = function(method){
 						        return html;
 			         		}
 			         		$('.feed.light .wrapper').append(feeder());
+			         		$('.'+methods.settings.type+'-item').css({
+			                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
+			                });
 			         		$(".scfeed .wrapper").freetile();
 			            	if(json.items.length<25){
 			            		privacy.settings.lastPage = true;
