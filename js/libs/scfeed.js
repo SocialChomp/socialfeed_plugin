@@ -115,6 +115,11 @@ var scFeed = function(method){
 	                methods.settings.container.append(html);
 	                methods.settings.container.append(loadMore);
 	                methods.settings.container.find(".wrapper").freetile();
+	                $(window).bind('scroll', function() {
+					        if($(window).scrollTop() >= methods.settings.container.offset().top + methods.settings.container.outerHeight() - window.innerHeight) {
+					          privacy.settings.appendFeedItems();
+					        }
+					});
 	                methods.settings.container.find('.load-more').on('click', function(){
 	                	privacy.settings.appendFeedItems();
 	                });
