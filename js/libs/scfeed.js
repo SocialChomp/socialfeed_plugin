@@ -186,7 +186,7 @@ var scFeed = function(method){
 			            ,success: function (json) {
 			            	privacy.settings.page++;
 			            	var feeder = function(){
-	         					var html;
+	         					var html='';
 	         					for(var i =1; i< json.items.length;i++){
 				        			html += '<div class="'+methods.settings.type+'-item">';
 				        			//If a item has an image url go ahead and add markup. 

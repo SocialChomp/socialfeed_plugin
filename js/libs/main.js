@@ -11,7 +11,7 @@ define(function (require) {
 			//$(".sidebar").sidebar();
 			//SocialChomp Feed
 			scFeed({
-				url:'https://api.socialchomp.com/s/556e410b29b0cadb78e159a7?apiKey=8caaa3e955ecd753dfdd15c5b163218bb896f680'
+				url:'https://api.socialchomp.com/s/55cf690b29b0cae564e87f65?apiKey=ed6336508a42f877644bc86381aedef2a5a1d66e'
 			});
 			/*fda stuff
 			fdaFeed();*/
