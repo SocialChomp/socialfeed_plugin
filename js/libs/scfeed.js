@@ -75,8 +75,28 @@ var scFeed = function(method){
 			        							</div>\
 			        						</div>';
 			        			}
+			        			//If Item has a username go ahead and add markup.
+			        			if(json.items[i].handle){
+			        				html += '<div class="row">\
+			        							<div class="description-wrap">\
+			        								<p class="description">\
+			        									<a href="'+json.items[i].from+'">@'+json.items[i].handle+'</a>\
+			        								</p>\
+			        							</div>\
+			        						</div>';
+			        			}
+			        			//If Item has a network go ahead and add markup.
+			        			if(json.items[i].network){
+			        				html += '<div class="row">\
+			        							<div class="description-wrap">\
+			        								<p class="description">\
+			        									<a href="'+json.items[i].social_link+'"><i class="fa fa-'+json.items[i].network+'"></i></a>\
+			        								</p>\
+			        							</div>\
+			        						</div>';
+			        			}
 			        			//If Item has a description go ahead and add markup.
-			        			if(json.items[i].description){
+			        			/*if(json.items[i].description){
 			        				html += '<div class="row">\
 			        							<div class="description-wrap">\
 			        								<p class="description">\
@@ -84,7 +104,7 @@ var scFeed = function(method){
 			        								</p>\
 			        							</div>\
 			        						</div>';
-			        			}
+			        			}*/
 			          		html +='</div>';
 				        }
 	         		}
@@ -200,7 +220,7 @@ var scFeed = function(method){
 				        						</div>';
 				        			}
 				        			//If Item has a description go ahead and add markup.
-				        			if(json.items[i].image){
+				        			if(json.items[i].description){
 				        				html += '<div class="row">\
 				        							<div class="description-wrap">\
 				        								<p class="description">\
