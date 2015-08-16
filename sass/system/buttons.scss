@@ -1,0 +1,127 @@
+
+//SQUARE BUTTONS
+li .btn-square{
+	height:37px;
+	line-height: 33px;
+	margin: 0px;
+}
+.inline-text{
+	.btn-square{display: inline-block;}
+}
+.btn-square{
+	position:relative;
+	border:none;
+	text-align:center;
+	@include border-radius(5px);
+	padding:10px 20px;	
+	margin:4px;
+	cursor:pointer;
+	@include backface();
+}
+.btn-square.green{
+	background:rgba(#fff,.80);
+	border:1px solid #2aad19;
+}
+.btn-square.red{
+	background:rgba(#fff,.80); 
+	border:1px solid #bf2a2a;
+}
+.btn-square.blue{
+	background:rgba(#fff,.80);
+	border:1px solid #2b80b7;
+}
+.btn-square.green-inverse{
+	background:rgba(#2aad19,1);
+	color:rgba(#fff,.80);
+}
+.btn-square.red-inverse{
+	background:rgba(#bf2a2a,1);
+	color:rgba(#fff,.80);
+}
+.btn-square.blue-inverse{
+	color:rgba(#fff,.80);
+	background:rgba(#2b80b7,1);
+}
+.btn-square.black{
+	color:rgba(#000,.65);
+	border:1.5px solid rgba(#000,.90);
+	background:rgba(#fff,.80);
+}
+.btn-square.black-inverse{
+	color:rgba(#fff,.95);
+	border:2px solid rgba(#fff,.90);
+	background:rgba(#000,.80);
+}
+.btn-square.white{
+	color:rgba(#000,.90);
+	background:rgba(#fff,.80);
+}
+//NAKED BUTTONS
+li .btn-naked{
+	height:37px;
+	line-height: 33px;
+	margin: 0px;
+}
+.inline-text{
+	.btn-naked{display: inline-block;}
+}
+.btn-naked{
+	position:relative;
+	border:none;
+	display:block;
+	text-align:left;
+	@include border-radius(5px);
+	padding:10px 0px;	
+	margin:4px;
+	cursor:pointer;
+	@include backface();
+	background: none;
+	text-decoration: none;
+}
+.btn-naked.green{
+	color:#2aad19;
+	font-weight:bold;
+}
+.btn-naked.red{
+	color:#bf2a2a;
+	font-weight:bold; 
+}
+.btn-naked.blue{
+	color:#2b80b7;
+	font-weight:bold;
+}
+.btn-naked.black{
+	color:#000;
+	font-weight:bold;
+}
+.btn-naked.white{
+	color:#fff;
+	font-weight:bold;
+}
+//BTN GROUPS
+.btn-group{
+	width:100%;
+	@include display-flex();
+}
+.btn-group .btn-cta{
+	&:first-child{
+		@include border-radiuses ($topright: 0px, $bottomright: 0px, $bottomleft: 5px, $topleft: 5px);
+	}
+	&:last-child{
+		@include border-radiuses ($topright: 5px, $bottomright: 5px, $bottomleft: 0px, $topleft: 0px);
+	}
+}
+.btn-group .btn-naked{
+	&:only-child{
+		border:none;
+	}
+	&:last-child{
+		border-left:1px solid #dedede;
+	}
+	@include border-radius(0px);
+	width:100%;
+}
+.btn-group.gray{
+		background:#f7f7f7;
+	}
+

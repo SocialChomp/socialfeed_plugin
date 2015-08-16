@@ -1,218 +1,256 @@
 @import "vars";
 @import "../bs_mixin/mixin";
+@mixin make-mobile-navbar(){
+	position: absolute;
+	top: 0px;
+	height:100%;
+	max-height: 0px;
+	overflow: hidden;
+	@include transition(max-height .3s ease-in-out);
+	.menu-wrapper{
+		position: absolute;
+		top: 0px;
+		left:-100%;
+		min-height:none;
+		display: block;
+		@include transition(left .3s ease-in-out);
+	}
+	.header{
+		position: fixed;
+		top:0px;left:-5px;right:0px;
+		width: 100%;
+		span.brand{
+			float: right;
+    		right: 50%;
+    		position: relative;
+		}
+		span.brand a{
+			float: right;
+    		right: -30%;
+    		position: relative;
+		}
+	}
+	.ul-right{
+		display: block;
+		position: fixed;
+		top:0px;left:auto;right:0px;
+		width: auto;
+		max-width: 250px;
+		li{
+			width: auto;
+		}
+	}
+	ul.active, ul.origin{display: block;}
+	ul,.ul-left{
+		display: none;
+		position: absolute;
+		top:43px;
+		width: 100%;
+		left:100%;
+		height:auto;
+		overflow: visible;
+		z-index: 500;
+		float: none;
+
+		li{
+			text-align: left;
+			display: block;
+			width:100%;
+			height:auto;
+			overflow: visible;
+			position: static;
+			a{width:100%;}
+			i.push-right{
+				position: absolute;
+  				right: 10px;
+  				top: 7px;
+			}
+		}
+	}
+	ul li ul{
+		position: absolute;
+		overflow: visible;
+		height:auto;
+		display: none;
+		top:0px;
+		left:100%;
+		width: 100%;
+		@include opacity(1);
+		li{
+			text-align: left;
+			display: block;
+			width:100%;
+			height:auto;
+			overflow: visible;
+		}
+	}
+	ul li ul li ul{
+		position: absolute;
+		overflow: visible;
+		height:auto;
+		display: none;
+		width: 100%;
+		left:100%;
+		max-width: none;
+		min-width: none;
+		@include opacity(1);
+		li{
+			text-align: left;
+			display: block;
+			width:100%;
+			height:auto;
+			overflow: visible;
+		}
+	}
+	
+
+}
 @mixin make-navbar($height:30px,$device:1){
-    @include transition(height .3s ease-in-out);
-    display:block;
-    min-height:$height/$device;
-    position:relative;
-    z-index:15;
-    width:100%;
-    ul{
-        display:block;
-        height:$height/$device;  
-        width:auto;
-        margin:0px;padding:0px;
-        margin-right:-4px/$device;
-        position:relative;
-    }
-    .ul-right{
-        position:absolute;right:10px/$device;top:5px/$device;
-        li{
-            //position:absolute;
-            //right:0px;
-            display:block;
-            padding-right:2px;
-        }
-    }
-    .ul-left{float:left;}
-    .brand{padding:0px 10px/$device;a{margin-top:12px;}}
-    ul li {
-        float:left;
-        overflow:hidden;
-        position:relative;
-        min-width: 180px;
-        max-width:225px;
-        text-align: center;
-        height: $height;
-        margin-right:-4px/$device;
-        text-indent:0px;
-        list-style:none;
-        line-height:$height/$device;
-    }
-    a{
-        display:block;
-        text-decoration:none; 
-        position:relative;
-        padding:2px/$device 10px/$device;
-    }
+	position:relative;
+	width:100%;
+	display:block;
+	min-height:$height/$device;
+	.menu-wrapper{
+		display:block;
+		min-height:$height/$device;
+		position:relative;
+		z-index:15;
+		width:100%;
+		@include transition(height .3s ease-in-out);
+	}
+	.header{
+		float:left;
+		display:block;
+		height:$height/$device;
+		width:auto;
+		margin:0px;padding:0px;
+		margin-right:-4px/$device;
+		margin-left:5px;
+		position:relative;
+		span{
+			cursor: pointer;
+			float:left;
+			position:relative;
+			min-width: auto;
+			text-align: center;
+			height: $height - 1px;
+			margin-right:-4px/$device;
+			text-indent:0px;
+			list-style:none;
+			line-height:$height/$device;
+			a{
+				display:block;
+				text-decoration:none;
+				position:relative;
+				padding:0px/$device 14px/$device;
+				img{margin-top:4px;}
+			}
+		}
+	}
+	ul{
+		float:left;
+		display:block;
+		height:$height/$device;
+		width:auto;
+		margin:0px;padding:0px;
+		margin-right:-4px/$device;
+		position:relative;
+	}
+	.ul-right{
+		position:absolute;
+		right:10px/$device;
+		top:0px;
+		li{
+			display:block;
+			padding-right:2px;
+		}
+	}
+	.ul-left{float:left;position: static;}
+	/*.brand{margin-right:100px;}*/
+	ul li {
+		float:left;
+		position:relative;
+		min-width: auto;
+		text-align: center;
+		height: $height - 1px;
+		margin-right:-4px/$device;
+		text-indent:0px;
+		list-style:none;
+		line-height:$height/$device;
+	}
+	a{
+		display:block;
+		text-decoration:none;
+		position:relative;
+		padding:0px/$device 14px/$device;
+	}
+	ul li ul{
+		position: absolute;
+		top:100%;
+		left:-20%;
+		display: block;
+		overflow: hidden;
+		@include transition(height  300ms ease-in);
+		width: auto;
+		height: auto;
+		@include opacity(0);
+	}
+	ul li ul li {
+		min-width: 170px;
+		display: inline-block;
+		height:auto;
+		text-align: left;
+		line-height:$height/2.5;
+		a{padding:8px/$device 19px/$device;}
+	}
+	ul li ul li ul{
+		position: relative;
+		left:0px;
+		display: block;
+		float: none;
+		max-width: 170px;
+		min-width: 50px;
+		overflow: hidden;
+		li{
+
+		}
+	}
+	ul li ul li ul li ul{
+		display: none;
+	}
 }
-@mixin make-label($color:#ddd){
-    background-color:$color;
-    &:hover{background-color:lighten($color,15%);}
+@mixin color-nav($color:#ddd, $lvl-one-text:#000, $lvl-two-text:#000, $lvl-three-text:#fff){
+	background-color:$color;
+	color: $lvl-one-text;
+	.header{
+		background-color:$color;
+		color:$lvl-one-text;
+		span{
+			color:$lvl-one-text;
+			min-width:50px;
+		}
+	}
+	.ul-right{
+		span{
+			color:$lvl-one-text;
+			min-width:50px;
+		}
+	}
+	li a:hover,.brand:hover{
+		background-color:lighten($color,15%);
+		@include transition('background-color 350ms ease-in-out');
+	}
+	a{
+		color: $lvl-one-text;
+	}
+	ul{
+		background-color:$color;
+	}
+	ul li ul li a{
+		color:$lvl-two-text;
+	}
+	ul li ul li ul li a{
+		color:$lvl-three-text;
+	}
 }
-@mixin color-nav($color:#ddd){
-    background-color:$color;
-    //li:hover,.brand:hover{background-color:lighten(@color,15%);}
-    color: contrast($color);
-    a{color: contrast($color);}
-}
-@mixin make-navbar-levels($height:30px,$device:1){
-    @include transition(height .3s ease-in-out);
-    display:block;
-    min-height:$height/$device;
-    position:relative;
-    width:100%;
-    ul{
-        display:block;
-        height:$height/$device;  
-        width:auto;
-        margin:0px;padding:0px;
-        margin-right:-4px/$device;
-        position:relative;
-    }
-    .ul-right{
-        position:absolute;right:10px/$device;top:5px/$device;
-        li{
-            //position:absolute;
-            //right:0px;
-            display:block;
-            padding-right:2px;
-        }
-    }
-    .ul-left{float:left;}
-    .brand{padding:0px 10px/$device;a{margin-top:12px;}}
-    ul li {
-        float:left;
-        min-width: 80px;
-        text-align: center;
-        height: $height;
-        margin-right:26px/$device;
-        text-indent:0px;
-        list-style:none;
-        line-height:$height+25/$device;
-    }
-    a{
-        display:inline;
-        text-decoration:none; 
-        position:relative;
-        padding:2px/$device 10px/$device;
-    }
-}
-@mixin make-side-nav($color:red){
-    border-top:3px solid $color;
-    span.nav-title{
-        @include font-size(25);
-        padding:5px;
-        font-family: 'league_gothicregular';
-        text-transform: uppercase;
-        font-weight: normal;
-        letter-spacing: 0px;
-        word-spacing: 3px;
-        background:#fff;
-        display:block;
-        margin:auto;
-        text-align: center;
-    }
-    ul{
-        overflow: hidden;
-        display: block;
-        width: 100%;
-        height: auto;
-        li.expand{
-            a{color:#000;}
-            span.expand{
-                i{@include rotate (0deg)}
-            }
-            ul{
-                right: 3px;
-                max-height: 600px!important;
-                li{
-                    z-index: 99;
-                    border-top: 1px solid #f2f2f2;
-                    border-left: none;
-                }
-                li.active{
-                    z-index: 99;
-                    border-top: 1px solid #f2f2f2;
-                    border-left:3px solid $color;
-                }
-            }
-        }
-        li.active{
-            background: #fff;
-            border-left:3px solid $color;
-            a{color:#000;}
-            span.expand{
-                i{@include rotate (0deg)}
-            }
-            ul{
-                right: 3px;
-                max-height: 600px!important;
-                li{
-                    z-index: 99;
-                    border-top: 1px solid #f2f2f2;
-                    border-left: none;
-                }
-                li.active{
-                    z-index: 99;
-                    border-top: 1px solid #f2f2f2;
-                    border-left:3px solid $color;
-                }
-            }
-        }
-        li{
-            @include transition('max-height .8s ease-in-out');
-            position: relative;
-            background: #f2f2f2;
-            list-style: none;
-            display: block;
-            border-top: 1px solid #ccc;
-            min-height:44px;
-            line-height: 44px;
-            text-align: left;
-            &:last-child{
-                border-bottom: 1px solid #ccc; 
-            }
-            a{padding-left:5px;color:#4c4c4c;text-decoration: none;height:100%; width:80%;display:block;}
-            span.expand{
-                position: absolute;
-                width:25px;
-                top:0px;
-                right:0px;
-                i{text-align: center;@include transition('all .5s ease-in-out'); @include rotate (180deg)}
-            }
-            &:hover{
-                ul{
-                    height: 100%;
-                    max-height: 600px;
-                } 
-                span.expand{
-                    i{@include rotate (0deg)}
-                }
-            }
-            ul{
-                @include transition('max-height .8s ease-in-out');
-                display: block;
-                overflow: hidden;
-                position: relative;
-                right: 0px;
-                width: 103%;
-                text-indent: 0px;
-                max-height: 0px;
-                height:100%;
-                li{
-                    border-bottom: none;
-                    border-top: 1px solid #f2f2f2;
-                    background: #ccc;
-                    padding-left:0px;
-                    a{color:#6a6a6a;text-decoration: none;padding-left:10px;height:100%; width:80%;display:block;}
-                }
-                li.active{
-                    z-index: 99;
-                    border-top: 1px solid #f2f2f2;
-                    border-left:3px solid $color;
-                }
-            }
-        }
-    }
-}
+

@@ -1,0 +1,34 @@
+$ldpi : 120;
+$mdpi : 160;
+$hdpi : 240;
+$xhdpi : 320;
+$base_dpi : $mdpi;
+
+@mixin set_lowP($px: 0) {
+    height: $px * ($ldpi / $base_dpi) + 0px;
+}
+@mixin set_mdpi($px: 0) {
+    height: $px * ($mdpi / $base_dpi) + 0px;
+}
+@mixin set_hdpi($px: 0) {
+    height: $px * ($hdpi / $base_dpi) + 0px;
+}
+@mixin set_xhdpi($px:0) {
+    height: $px * ($xhdpi / $base_dpi) + 0px;
+}
+@mixin set_allHP($px: 0, $attr:height, $dpi: $mdpi) {
+    #{$attr}: $px * ($dpi / $base_dpi) + 0px;
+}
+@mixin set_allP($px: 0, $maxPx:auto,$minPx:auto, $dpi: $mdpi) {
+    height: $px * ($dpi / $base_dpi) + 0px;
+	@if $maxPx == "auto" {
+		max-height:auto;
+	}@else if $maxPx > 0{
+		max-height: $maxPx * ($dpi / $base_dpi) + 0px;
+	}
+	@if $minPx == "auto" {
+		min-height:auto;
+	}@else if $minPx > 0{
+		min-height: $minPx * ($dpi / $base_dpi) + 0px;
+	}
+}

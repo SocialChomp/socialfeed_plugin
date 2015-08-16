@@ -118,7 +118,7 @@
         .#{$rowname} {
             position:relative;
             @include clearfix();
-            margin-top:20px;
+            //margin-top:20px;
         }
         .#{$rowname}:first-child {
             margin-top:0px;

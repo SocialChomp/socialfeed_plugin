@@ -7,78 +7,79 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable = no"><!--fixes Ipad issues when rotating-->
     <meta property="og:image" content="images/favicon"/>
-    <title>THE Index</title>
+    <title>Home Page</title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"><!--font-icons if needed-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/core.scss.css" type="text/css" media="screen"><!--rename to core.less.css or core.scss.css depending on the preprocessor-->
 </head>
 
 <body>
-    <header>
-      <p>Spinning Globe</p>    
-    </header><!--header-->
-    <div class="container">
-        <div class="wrapper">
-            <div class="holdMap">
-                <div class="menu hampton">
-                    <a href="http://www.ptana.org/all-chapters/hampton-roads.html" target="_blank"><i class="fa fa-map-marker"></i></a>
-                    <!--<div class="menu-container">
-                        <p>Chapters</p>
-                        <ul>
-                            <li><a href="#">Atlanta Chapter</a></li>
-                            <li><a href="#">Hampton Roads</a></li>
-                            <li><a href="#">Maryland Chapter</a></li>
-                            <li><a href="#">New England Chapter</a></li>
-                        </ul>
-                    </div>-->
-                </div>
-                <div class="menu houston">
-                    <a href="http://www.ptana.org/all-chapters/greater-houston-chapter.html" target="_blank"><i class="fa fa-map-marker"></i></a>
-                    <!--<div class="menu-container">
-                        <p>Chapters</p>
-                        <ul>
-                            <li><a href="#">Atlanta Chapter</a></li>
-                            <li><a href="#">Hampton Roads</a></li>
-                            <li><a href="#">Maryland Chapter</a></li>
-                            <li><a href="#">New England Chapter</a></li>
-                        </ul>
-                    </div>-->
-                </div>
-                <div class="menu baltimore">
-                    <a href="http://www.ptana.org/all-chapters/maryland-chapter.html" target="_blank"><i class="fa fa-map-marker"></i></a>
-                    <!--<div class="menu-container">
-                        <p>Chapters</p>
-                        <ul>
-                            <li><a href="#">Atlanta Chapter</a></li>
-                            <li><a href="#">Hampton Roads</a></li>
-                            <li><a href="#">Maryland Chapter</a></li>
-                            <li><a href="#">New England Chapter</a></li>
-                        </ul>
-                    </div>-->
-                </div>
-                <div class="menu detroit">
-                    <a href="http://www.ptana.org/all-chapters/greater-detroit-chapter.html" target="_blank"><i class="fa fa-map-marker"></i></a>
-                    <!--<div class="menu-container">
-                        <p>Chapters</p>
-                        <ul>
-                            <li><a href="#">Atlanta Chapter</a></li>
-                            <li><a href="#">Hampton Roads</a></li>
-                            <li><a href="#">Maryland Chapter</a></li>
-                            <li><a href="#">New England Chapter</a></li>
-                        </ul>
-                    </div>-->
-                </div>
-                <div class="overlay"></div>
-                <canvas id='basicGlobe' width='400' height='400'></canvas>
-                <h1>PTANA</h1>
-                <h2>Professional Travel Agents of North America</h2>
-                <h2 class="small">Promoting Domestic and International Travel</h2>
+    <div class="row">
+        <div class="span14">
+            <div class="white-block">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="row">
+                        <div class="span12">
+                            <h1>Content</h1>
+                            <div class='scfeed'>
+
+                            </div>
+                        </div>
+                        <div class="span2">
+                            
+                        </div>
+                        <div class="span3">
+                            <h1>Side Widgets</h1>
+                            <div class="row">
+                               <!-- <div class="fda">
+                                     Comments are just to fix whitespace with inline-block 
+                                    <div class="preloader">
+                                      <div class="dot1"></div>
+                                      <div class="dot2"></div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div><!--row-->
+                </div><!--wrapper-->
+            </div><!--container-->
+            </div><!--white block-->
+        </div>
+    </div>
+    <div class="footer black-block white">
+        <div class="row">
+            <div class="span2">
+                <div class="row"></div>
+                <div class="row"></div>
             </div>
-        </div><!--wrapper-->
-    </div><!--container-->
-    
+            <div class="span10">
+                <div class="row"></div>
+                <div class="row">
+                    <ul class="inline-text">
+                        <li><a href="">Terms of Use</a></li> |
+                        <li><a href="">SiteMap</a></li> |
+                        <li><a href="">About HPRC</a></li> |
+                        <li><a href="">HPRC BLog</a></li> |
+                        <li><a href="">Login</a></li> 
+                    </ul>
+                </div>
+                <div class="row">
+                    <p class="span13">Linking Policy:<br/>The appearance of a hyperlink does not constitute endorsement of the linked website or the information, products or services contained therein by the United States Government, Department of Defense, uniformed services or Uniformed Services University. For other than authorized activities such as military exchanges and morale, welfare, and recreation sites, the Department of Defense, uniformed services and the Uniformed Services University does not exercise any editorial control over the information you may find at this location. This link is provided consistent with the stated purpose of this military web.</p>
+                </div>
+            </div>
+            <div class="span2">
+                <div class="row">
+                    <p>Some documents are in a PDF format. </p>
+                </div>
+                <div class="row"></div>
+            </div>
+        </div>
+    </div><!--footer-->
     <!--HTML SCRIPTS-->
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"/></script>
     <script data-main="scripts/main" src="js/modernizr.js"></script>
     <script data-main="js/core" src="js/require.js"></script>
     <!--END HTML SCRIPTS-->

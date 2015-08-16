@@ -23,7 +23,7 @@ $base-size:14;
     ul.bullit{
         li{@include font-size(15); line-height: 20px;display: table-row;}
         li:before {
-            content: "• ";
+            content: '\2022';
             color: $color; /* or whatever color you prefer */
             display: table-cell;
             text-align: right;
@@ -33,11 +33,9 @@ $base-size:14;
     }
 }
 //@include text-shadow(x y blur color);
-@mixin text-shadow ($string:' 0 1px 3px rgba(0, 0, 0, 0.25)') {
-    text-shadow: #{$string};
+@mixin text-shadow ($string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+    text-shadow: $string;
 }
-
-
 //@include box-shadow(x y blur spread color);
 @mixin box-shadow ($string: 0 0 1px 2px rgba(0, 0, 0, .25)) {
     -webkit-box-shadow: $string;
@@ -85,6 +83,19 @@ $base-size:14;
     box-sizing:         $type;
 }
 
+@mixin display-flex(){
+	-ms-box-orient: horizontal;
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: flex;
+}
+@mixin justify-content($type: space-around){
+	-webkit-justify-content: $type;
+	justify-content: $type;
+}
 @mixin border-radius ($radius: 5px) {
     -webkit-border-radius: $radius;
     -moz-border-radius:    $radius;
@@ -172,6 +183,13 @@ $base-size:14;
 @mixin show{
     display:inherit;
     visibility:visible;
+}
+@mixin transform($string) {
+    -webkit-transform: $string;
+    -moz-transform: $string;
+    -ms-transform: $string;
+    -o-transform: $string;
+    transform: $string;
 }
 @mixin transform-important ($string){
     -webkit-transform: $string;

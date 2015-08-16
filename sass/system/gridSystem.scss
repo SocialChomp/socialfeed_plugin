@@ -1,0 +1,77 @@
+body{
+	@include make-fluid-grid(14,320px,2500px,span,row);
+	@media screen and (max-width :759px) {
+
+	}
+	@media screen and (max-width :759px) {
+		.span12{
+			width:100%;
+			.span1,.span2{width:100%;}
+		}
+		.span10{
+			width:100%;
+			.span1,.span2{width:100%;}
+		}
+		.span9{
+			width:100%;
+			.span1,.span2{width:100%;}
+		}
+		.span8{
+			width:100%;
+			.span1,.span2,.span3,.span4{width:100%;}
+		}
+		.span7{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5{width:100%;}
+		}
+		.span6{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5{width:100%;}
+		}
+		.span5{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5,.span6{width:100%;}
+		}
+		.span4{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8,.span9,.span10,.span11,.span12,.span13,.span14{width:100%;}
+		}
+		.span3{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8,.span9,.span10,.span11,.span12,.span13,.span14{width:100%;}
+		}
+		.span2{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8,.span9,.span10,.span11,.span12,.span13,.span14{width:100%;}
+		}
+		.span1{
+			width:100%;
+			.span1,.span2,.span3,.span4,.span5,.span6,.span7,.span8,.span9,.span10,.span11,.span12,.span13,.span14{width:100%;}
+		}
+		.row.centered-mobile{text-align: center;
+			> [class*='span']{
+					float: none;
+					display: inline-block;
+					vertical-align: top;
+					text-align: left;
+				}
+			}
+	
+	}
+	.row.centered{
+		text-align: center;
+		> [class*='span']{
+			float: none;
+			display: inline-block;
+			vertical-align: top;
+			text-align: left;
+		}
+	}
+	[class*='span'].centered{
+		text-align: center !important;
+	}
+	.row.wide{padding:5px;}
+	.row.thin{padding:15px;}
+	@include make-button-gridFluid(21,85px,320px,btnFluid-);
+	.center-bottom-fixed [class*='btnFluid']{margin:0 auto;position: absolute; left: 0px; right: 0px;}
+}

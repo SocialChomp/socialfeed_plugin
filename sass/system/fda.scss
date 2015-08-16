@@ -1,0 +1,152 @@
+.fda{
+	border:1px solid #cacaca;
+	height:350px;
+	background:#ffffff;
+	overflow:hidden;
+	position: relative;
+	h1,h2,h3,h4,h5,h6,p,a,strong{line-height: 0px;font-weight: 400;letter-spacing: 0px;word-spacing: -1px;}
+	a{color:#156e9a;}
+	.header{
+		padding-top:5px;
+		padding-left:5px;
+		padding-bottom:5px;
+		position: relative;
+		z-index:99;
+		@include drop-shadow();
+		.fda-logo{
+			display:inline-block;width:20%;
+			img{width: 100%; height: auto;display: block;}
+		}
+		h4{
+			line-height: 20px;
+			font-weight: 800;
+			font-size: 10px;
+			color:#166d98;
+			display:inline-block;
+			width:80%;
+		}
+	}
+	#entries{
+		position: relative;
+		z-index:1;
+		height:310px;
+		width:105.5%;
+		overflow:hidden;
+		overflow-y:scroll;
+		.wrapper{padding:0px;}
+	}
+	.item{
+		padding:5px;
+		padding-right: 2px;
+		border-bottom: 1px solid #cacaca;
+		height:98px;
+		overflow: hidden;
+		@include transition(all  300ms ease-in);
+		&:hover{background: #e8f7fa;}
+	}
+	.title{
+		p{
+			line-height: 20px; 
+			font-size: 12px; 
+			height:65px; 
+			overflow:hidden;
+			text-overflow: ellipsis;
+			-webkit-box-orient: vertical;
+			width: 100%;
+		}
+	}
+	.date{
+		float:left;
+		display: block;
+		width:80%;height:27px;
+		p{line-height: 27px; font-size: 10px; color:#959a9e;word-spacing: 0px;}
+	}
+	.view-more{
+		float:left;
+		display: block;
+		width:20%;height:27px;
+	}
+
+
+
+	.preloader {
+	  position: absolute;
+	  width: 40px;
+	  height: 40px;
+	  margin: auto;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+
+	  -webkit-animation: rotate 2.0s infinite linear;
+	}
+
+	.dot1,
+	.dot2 {
+	  position: absolute;
+	  display: inline-block;
+	  width: 60%;
+	  height: 60%;
+	  background: #166d98;
+	  border-radius: 100%;
+	  
+	  -webkit-animation: bounce 2.0s infinite ease-in-out;
+	  animation: bounce 2.0s infinite ease-in-out;
+	}
+
+	.dot2 {
+	  bottom: 0px;
+	  -webkit-animation-delay: -1.0s;
+	  animation-delay: -1.0s;
+	}
+
+	@-webkit-keyframes rotate {
+	  100% {
+	    transform: rotate(360deg);
+	    -webkit-transform: rotate(360deg);
+	  }
+	}
+
+	@keyframes rotate {
+	  100% {
+	    transform: rotate(360deg);
+	    -webkit-transform: rotate(360deg);
+	  }
+	}
+
+	@-webkit-keyframes bounce {
+	  0%, 100% {
+	    opacity: 0;
+	    transform: scale(0.0);
+	    -webkit-transform: scale(0.0);
+	  }
+	  
+	  50% {
+	    opacity: 1;
+	    transform: scale(1.0);
+	    -webkit-transform: scale(1.0);
+	  }
+	}
+
+	@keyframes bounce {
+	  0%, 100% {
+	    transform: scale(0.0);
+	    -webkit-transform: scale(0.0);
+	  }
+	  
+	  50% {
+	    transform: scale(1.0);
+	    -webkit-transform: scale(1.0);
+	  }
+	}
+}
+@media screen and (max-width: 766px) {
+	//.fda .header {height: 44px;}
+	.fda .header .fda-logo {width: 10%;}
+	.fda .header h4 {
+	  line-height: 19px;
+	  font-size: 15px;
+	  width: 80%;
+	}
+}

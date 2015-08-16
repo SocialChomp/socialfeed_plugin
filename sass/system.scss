@@ -1,7 +1,13 @@
 @import 'system/vars';
-@import 'system/general';
+@import 'system/gridSystem';
+@import 'system/scfeed';
+@import 'system/fda';
 @import 'system/text'; 
-@import 'system/section';
+@import 'system/nav';
+@import 'system/form';
+@import 'system/buttons';
+@import 'system/images'; 
+@import 'system/section'; 
 html,body {
     -ms-touch-action: none;
 }
@@ -16,68 +22,38 @@ body,html{height:100%;}
 //BASIC BLOCK/POS
 body{
  background: white; 
+  font-family: 'Open Sans','Helvectica' sans-serif;
 }
-header{
-  text-align:center;
-  color:white;
- display:block;
-  position:absolute;
-  top:0px;right:0px;left:0px;
-  height:90px;
-  background:#2f2f2f;
-  margin-bottom:10px;
-  div{text-align:center;}
-  a{color:white;}
-  a span{margin-left:5px;margin-right:5px;}
+//BASIC BLOCK/POS
+body{
+ background: #f1f1f1; 
 }
-.container{
- margin-top:100px; 
-}
-.holdMap {
+body.toolbar  #application{
     position: relative;
-margin-top: 150px;
-width: 400px;
-height: 400px;
-
-}
-canvas{position: relative; }
-.overlay{
-  background:url('../images/overlay.png');
-  display: block;
-  width:553px;
-  height:511px;
-  position: absolute;
-  top: -63px;
-  left: -75px;
-  z-index: 1;
+    top:46px;
+    .main-navigation{position: absolute!important;}
 }
 /*-----------------------------MAIN VIEW---------------------------------*/
 
 .container{
-    @include make-responsive-grid(
-        $gridColumns: 12,
-        $gridColumnWidth: 59px,
-        $gridGutterWidth: 27px,
-        $columnname:span,
-        $rowname:row,
-        $mobileP:320px,
-        $mobileL:959px,
-        $tabletP:960px,
-        $tabletL:1024px
-    );
+  position: relative;
+  max-width:1024px;
     .wrapper{padding:10px;}
-    @import 'system/header'; 
-    @import 'system/section';
-    @import 'system/buttons';
-    @import 'system/form';
     margin:0 auto; 
 }
+//MOBILE
+@media(max-width: 1024px){
+     @import 'system/mobile';
+}
 //iPhone
-@media screen and (max-width :959px) {
+@media(max-width: 767px) {
     @import 'system/iphone';
 }
 //iPAD
-@media (min-width:960px) and (max-width:1024px){
+@media(max-width: 767px) and (max-width: 920px){
+    @import 'system/ipadTall';
+}
+@media (min-width: 768px) and (max-width: 1024px) {
     @import 'system/ipad';
 }
 //LARGE SCREEN
@@ -85,3 +61,33 @@ canvas{position: relative; }
     width:1280px;  
 }
 /*-----------------------------MAIN VIEW---------------------------------*/
+@media screen and (max-width: 766px) {
+    .display-desktop {display:none;visibility:hidden;}
+    .display-tablet {display:none;visibility:hidden;}
+    .display-mobile {display:block;visibility:visible;}
+    //.not-handheld{display:none;visibility:hidden;}
+    //.handheld{display:block;visibility:visible;}
+    .not-mobile {display:none;visibility:hidden;}
+    .not-desktop {display:block;visibility:visible;}
+    .not-tablet {display:block;visibility:visible;}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .display-desktop {display:none;visibility:hidden;}
+    .display-tablet {display:block;visibility:visible;}
+    .display-mobile {display:none;visibility:hidden;}
+    //.not-handheld{display:none;visibility:hidden;}
+    //.handheld{display:block;visibility:visible;}
+    .not-mobile {display:block;visibility:visible;}
+    .not-desktop {display:block;visibility:visible;}
+    .not-tablet {display:none;visibility:hidden;}
+}
+@media (min-width: 1025px) {
+    .display-desktop {display:block;visibility:visible;}
+    .display-tablet {display:none;visibility:hidden;}
+    .display-mobile {display:none;visibility:hidden;}
+    //.not-handheld{display:block;visibility:visible;}
+    //.handheld{display:none;visibility:hidden;}
+    .not-mobile {display:block;visibility:visible;}
+    .not-desktop {display:none;visibility:hidden;}
+    .not-tablet {display:block;visibility:visible;}
+}

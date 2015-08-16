@@ -1,0 +1,34 @@
+.span12{
+	width:100%!important;
+}
+.main-navigation ul li{
+    font-family: 'Helvetica', Arial, sans-serif;
+    @include font-size(12);
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    letter-spacing:.5px;
+    word-spacing:.5px;
+    i{@include font-size(20);}
+    ul li{@include font-size(14);}
+}
+.main-navigation{
+    @include make-mobile-navbar();
+    @include color-nav(#171717,$lvl-one-text: #fff, $lvl-two-text: #f8b91a);
+    background-color: rgba(0,0,0,0);
+    li.active {
+        border-bottom: none;
+    }
+    li:hover{ ul {border-top:none;}ul li ul{border:none;}}
+    position: fixed;
+    top:0px;
+}
+.main-navigation + div {
+  padding-top: 43px;
+}
+.announcement, .alert{
+	width:100%;
+}
+.sidebar{
+	display:none;
+}

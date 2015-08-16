@@ -1,0 +1,96 @@
+.light{
+	&.feed{
+		margin: 0 auto;
+		display: block;
+		position: relative;
+		background: #e6e6e6;
+		@import 'scfeed/light.default';
+		//Other devices
+		@media(max-width: 1024px){
+     		@import 'scfeed/mobile';
+		}
+		//iPhone
+		@media(max-width: 750px) {
+		    @import 'scfeed/iphone';
+		}
+		//iPAD
+		@media(min-width: 767px) and (max-width: 920px){
+		    @import 'scfeed/ipadTall';
+		}
+		@media (min-width: 768px) and (max-width: 1024px) {
+		    @import 'scfeed/ipad';
+		}
+		//LARGE SCREEN
+		@media(min-width:1025px){
+		    @import 'scfeed/largeScreen';
+		}
+	}
+	&.slideshow{
+		@import 'scfeed/light.default';
+		@media(max-width: 1024px){
+     		@import 'scfeed/mobile';
+		}
+		//iPhone
+		@media(max-width: 767px) {
+		    @import 'scfeed/iphone';
+		}
+		//iPAD
+		@media(max-width: 767px) and (max-width: 920px){
+		    @import 'scfeed/ipadTall';
+		}
+		@media (min-width: 768px) and (max-width: 1024px) {
+		    @import 'scfeed/ipad';
+		}
+		//LARGE SCREEN
+		@media(min-width:1025px){
+		    @import 'scfeed/largeScreen';
+		}
+	}
+	&.custom{}
+}
+
+.dark{
+	&.feed{
+		@import 'scfeed/dark.default';
+		@media(max-width: 1024px){
+     		@import 'scfeed/mobile';
+		}
+		//iPhone
+		@media(max-width: 767px) {
+		    @import 'scfeed/iphone';
+		}
+		//iPAD
+		@media(max-width: 767px) and (max-width: 920px){
+		    @import 'scfeed/ipadTall';
+		}
+		@media (min-width: 768px) and (max-width: 1024px) {
+		    @import 'scfeed/ipad';
+		}
+		//LARGE SCREEN
+		@media(min-width:1025px){
+		    @import 'scfeed/largescreen';
+		}
+	}
+	&.slideshow{
+		@import 'scfeed/dark.default';
+		@media(max-width: 1024px){
+     		@import 'scfeed/mobile';
+		}
+		//iPhone
+		@media(max-width: 767px) {
+		    @import 'scfeed/iphone';
+		}
+		//iPAD
+		@media(max-width: 767px) and (max-width: 920px){
+		    @import 'scfeed/ipadTall';
+		}
+		@media (min-width: 768px) and (max-width: 1024px) {
+		    @import 'scfeed/ipad';
+		}
+		//LARGE SCREEN
+		@media(min-width:1025px){
+		    @import 'scfeed/largescreen';
+		}
+	}
+	&.custom{}
+}

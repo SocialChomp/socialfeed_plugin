@@ -1,0 +1,16 @@
+.main-navigation{
+	padding-top:10px;
+	z-index:99;
+	li.active {
+  		border-bottom: 2px solid #f8b91a;
+	}
+	@include make-navbar(43px);
+	@include color-nav(#323232,$lvl-one-text: #fff, $lvl-two-text: #f8b91a);
+	li:hover{ ul {border-top:2px solid #f8b91a;}ul li ul{border:none;}}
+	ul li a{color:white;}
+	.container .wrapper{padding:0px;}
+	position: fixed;
+	top:0px;
+	left:0px;
+	a{@include transition(all  300ms ease-in);}
+}
