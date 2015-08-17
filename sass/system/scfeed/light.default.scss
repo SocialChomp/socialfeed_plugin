@@ -112,14 +112,57 @@ p.created{
 	word-spacing:.5px;
 }
 /*IMAGE ERROR HANDLING*/
-.profile-wrap .img-error{height:40px;@include border-radius(40px);}
-.image-wrap .img-error{height:80px;}
+.profile-wrap .img-error{height:40px;@include border-radius(40px);&:after{font-size: 20px;height:20px;}}
+.image-wrap .img-error{height:80px;&:after{font-size: 50px;height:50px;}}
 .img-error{
 	position: relative;
 	display: block;
 	width:100%;
 	height:100%;
+	&:after{
+		font-family: 'FontAwesome';
+		font-weight: normal;
+  		font-style: normal;
+  		display: inline-block;
+  		font-size: inherit;
+  		text-rendering: auto;
+  		-webkit-font-smoothing: antialiased;
+  		-moz-osx-font-smoothing: grayscale;
+  		text-align: center;
+  		position: absolute;
+  		top:0px;right:0px;left:0px;bottom:0px;
+  		margin:auto;
+	}
 }
 .twitter .img-error{
 	background: #00aced;
+	&:after{content: "\f099"; color:darken(#00aced,20%);}
+}
+.facebook .img-error{
+	background: #3b5998;
+	&:after{content: "\f09a";color:lighten(#3b5998,20%);}
+}
+.instagram .img-error{
+	background: #517fa4;
+	&:after{content: "\f16d";color:lighten(#517fa4,20%);}
+}
+.googlePlus .img-error{
+	background: #dd4b39;
+	&:after{content: "\f0d5"; color:darken(#dd4b39,20%);}
+}
+.pinterest .img-error{
+	background: #cb2027;
+	&:after{content: "\f0d2"; color:darken(#cb2027,20%);}
+}
+.vine .img-error{
+	background: #00bf8f;
+	&:after{content: "\f1ca"; color:darken(#00bf8f,20%);}
+}
+.linkedin .img-error{
+	background: #007bb6;
+	&:after{content: "\f0e1"; color:lighten(#007bb6,20%);}
+}
+.tumblr .img-error{
+	background: #32506d;
+	&:after{content: "\f173"; color:lighten(#32506d,20%);}
 }
