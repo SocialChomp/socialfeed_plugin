@@ -3,6 +3,7 @@ define(function (require) {
 	require('imagesloaded.pkgd.min');
 	//require('iscroll');
 	require('jquery.freetile');
+	require('jquery.lazyload.min');
 	//require('fda');
 	require('scfeed');
 	//require('jquery.backstretch.min');

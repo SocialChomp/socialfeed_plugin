@@ -12,6 +12,8 @@ var scFeed = function(method){
 			coverUrl:'',
 			custom: function(){},
 			feedOptions: {
+				//does this use infinity scrolling
+				infinity:true,
 				//should images open in a pop-up modal when clicked
 				modal:false,
 				//Set the number of columns per device
@@ -60,7 +62,7 @@ var scFeed = function(method){
 	            ,success: function (json) {
 	            	console.log(json);
 	            	var html='';
-	            	var loadMore="<button class='load-more'>Load More</button>";
+	            	
 	            	var feeder = function(){
          				var date;
          				for(var i =1; i< json.items.length;i++){
@@ -70,7 +72,7 @@ var scFeed = function(method){
 			        				html += '<div class="row">\
 			        							<div class="image-wrap">\
 			        								<div class="image-hold">\
-			        									<img src="'+json.items[i].image+'" alt=""/>\
+			        									<img class="lazy" data-original="'+json.items[i].image+'" src="" alt=""/>\
 			        								</div>\
 			        							</div>\
 			        						</div>';
@@ -113,16 +115,15 @@ var scFeed = function(method){
 	                html +='</div></div>'
 	                //add the feed to the container div
 	                methods.settings.container.append(html);
-	                methods.settings.container.append(loadMore);
-	                methods.settings.container.find(".wrapper").freetile();
-	                $(window).bind('scroll', function() {
-					        if($(window).scrollTop() >= methods.settings.container.offset().top + methods.settings.container.outerHeight() - window.innerHeight) {
-					          privacy.settings.appendFeedItems();
-					        }
+	                $("img.lazy").lazyload({
+					  event: "scrollstop",
+					  effect : "fadeIn"
 					});
-	                methods.settings.container.find('.load-more').on('click', function(){
-	                	privacy.settings.appendFeedItems();
-	                });
+					$("img.lazy").error(function(){
+					        $(this).hide();
+					});
+	                methods.settings.container.find(".wrapper").freetile();
+	                privacy.settings.returnLoader();
 	                //The width controls how many columns to display
 	                $('.'+methods.settings.type+'-item').css({
 	                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
@@ -171,6 +172,7 @@ var scFeed = function(method){
 		settings: {
 			page:2,
 			lastPage:false,
+			requestInProcess: false,
 			/* CleanUrl checks to is if the url is a valid link coming from socialchomp before it makes a http request. Its not bullit proof validation but basic validation before a network request goes out*/
 			cleanUrl:function(){
 				if(methods.settings.url || /\S/.test(methods.settings.url)){
@@ -201,56 +203,98 @@ var scFeed = function(method){
 					return methods.settings.feedOptions.mobileColumns;
 				}
 			},
-			appendFeedItems: function(){
-				if(!privacy.settings.lastPage){
-					console.log('loading content');
-					$.ajax({
-			            url:methods.settings.url+'&page='+privacy.settings.page
-			            ,type : "GET"
-			            ,dataType : "json"
-			            ,success: function (json) {
-			            	privacy.settings.page++;
-			            	var feeder = function(){
-	         					var html='';
-	         					for(var i =1; i< json.items.length;i++){
-				        			html += '<div class="'+methods.settings.type+'-item">';
-				        			//If a item has an image url go ahead and add markup. 
-				        			if(json.items[i].image){
-				        				html += '<div class="row">\
-				        							<div class="image-wrap">\
-				        								<div class="image-hold">\
-				        									<img src="'+json.items[i].image+'" alt=""/>\
-				        								</div>\
-				        							</div>\
-				        						</div>';
-				        			}
-				        			//If Item has a description go ahead and add markup.
-				        			if(json.items[i].description){
-				        				html += '<div class="row">\
-				        							<div class="description-wrap">\
-				        								<p class="description">\
-				        									'+json.items[i].description+'\
-				        								</p>\
-				        							</div>\
-				        						</div>';
-				        			}
-					          		html +='</div>';
-						        }
-						        return html;
-			         		}
-			         		$('.feed.light .wrapper').append(feeder());
-			         		$('.'+methods.settings.type+'-item').css({
-			                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
-			                });
-			         		$(".scfeed .wrapper").freetile();
-			            	if(json.items.length<25){
-			            		privacy.settings.lastPage = true;
-			            	}
-			            }
-			        });
-					
+			returnLoader: function(){
+				if(methods.settings.feedOptions.infinity){
+					$(window).bind('scroll', function() {
+					        if($(window).scrollTop() >= methods.settings.container.offset().top + methods.settings.container.outerHeight() - window.innerHeight) {
+					          privacy.settings.appendFeedItems();
+					        }
+					});
 				}else{
-					console.log('all content has loaded');
+					var loadMore="<button class='load-more'>Load More</button>";
+					methods.settings.container.append(loadMore);
+					methods.settings.container.find('.load-more').on('click', function(){
+	                	privacy.settings.appendFeedItems();
+	                });
+				} 
+			},
+			appendFeedItems: function(){
+				if(!privacy.settings.requestInProcess){
+					if(!privacy.settings.lastPage){
+						console.log('loading content');
+						privacy.settings.requestInProcess = true;
+						$.ajax({
+				            url:methods.settings.url+'&page='+privacy.settings.page
+				            ,type : "GET"
+				            ,dataType : "json"
+				            ,success: function (json) {
+				            	privacy.settings.page++;
+				            	var feeder = function(){
+		         					var html='';
+		         					for(var i =1; i< json.items.length;i++){
+					        			html += '<div class="'+methods.settings.type+'-item">';
+					        			//If a item has an image url go ahead and add markup. 
+					        			if(json.items[i].image){
+					        				html += '<div class="row">\
+					        							<div class="image-wrap">\
+					        								<div class="image-hold">\
+					        									<img src="'+json.items[i].image+'" alt=""/>\
+					        								</div>\
+					        							</div>\
+					        						</div>';
+					        			}
+					        			//If Item has a username go ahead and add markup.
+					        			if(json.items[i].handle){
+					        				html += '<div class="row">\
+					        							<div class="description-wrap">\
+					        								<p class="description">\
+					        									<a href="'+json.items[i].from+'">@'+json.items[i].handle+'</a>\
+					        								</p>\
+					        							</div>\
+					        						</div>';
+					        			}
+					        			//If Item has a network go ahead and add markup.
+					        			if(json.items[i].network){
+					        				html += '<div class="row">\
+					        							<div class="description-wrap">\
+					        								<p class="description">\
+					        									<a href="'+json.items[i].social_link+'"><i class="fa fa-'+json.items[i].network+'"></i></a>\
+					        								</p>\
+					        							</div>\
+					        						</div>';
+					        			}
+					        			//If Item has a description go ahead and add markup.
+					        			/*if(json.items[i].description){
+					        				html += '<div class="row">\
+					        							<div class="description-wrap">\
+					        								<p class="description">\
+					        									'+json.items[i].description+'\
+					        								</p>\
+					        							</div>\
+					        						</div>';
+					        			}*/
+						          		html +='</div>';
+							        }
+							        return html;
+				         		}
+				         		$('.feed.light .wrapper').append(feeder());
+				         		$("img.lazy").error(function(){
+								        $(this).hide();
+								});
+				         		$('.'+methods.settings.type+'-item').css({
+				                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
+				                });
+				         		$(".scfeed .wrapper").freetile();
+				         		privacy.settings.requestInProcess = false;
+				            	if(json.items.length<25){
+				            		privacy.settings.lastPage = true;
+				            	}
+				            }
+				        });
+						
+					}else{
+						console.log('all content has loaded');
+					}
 				}
 			},
 			filterData: function(json){
