@@ -13,13 +13,13 @@ var scFeed = function(method){
 			custom: function(){},
 			feedOptions: {
 				//does this use infinity scrolling
-				infinity:true,
+				infinity:false,
 				//should images open in a pop-up modal when clicked
 				modal:false,
 				//Set the number of columns per device
 				desktopColumns:4,
 				tabletColumns:3,
-				mobileColumns:1.5,
+				mobileColumns:2,
 				//Choose to only display one network or exlcude any networks. 
 				excludeNetworks:[],
 				includeNetworks:[],
@@ -72,33 +72,31 @@ var scFeed = function(method){
 			        				html += '<div class="row">\
 			        							<div class="image-wrap">\
 			        								<div class="image-hold">\
-			        									<img class="lazy" data-original="'+json.items[i].image+'" src="" alt=""/>\
+			        									<img src="'+json.items[i].image+'" alt=""/>\
 			        								</div>\
 			        							</div>\
 			        						</div>';
 			        			}
 			        			//If Item has a username go ahead and add markup.
+			        			html += '<div class="row">';
+			        			if(json.items[i].profile_image){
+			        				html += '<div class="profile-wrap">\
+			        								<div class="profile-hold">\
+			        									<img class="profile" src="'+json.items[i].profile_image+'" alt=""/>\
+			        								</div>\
+			        							</div>';
+			        			}
+			        			//If Item has a username go ahead and add markup.
 			        			if(json.items[i].handle){
-			        				html += '<div class="row">\
-			        							<div class="description-wrap">\
-			        								<p class="description">\
+			        				html += '<div class="handle-wrap">\
+			        								<p class="handle">\
 			        									<a href="'+json.items[i].from+'">@'+json.items[i].handle+'</a>\
 			        								</p>\
-			        							</div>\
-			        						</div>';
+			        							</div>';
 			        			}
-			        			//If Item has a network go ahead and add markup.
-			        			if(json.items[i].network){
-			        				html += '<div class="row">\
-			        							<div class="description-wrap">\
-			        								<p class="description">\
-			        									<a href="'+json.items[i].social_link+'"><i class="fa fa-'+json.items[i].network+'"></i></a>\
-			        								</p>\
-			        							</div>\
-			        						</div>';
-			        			}
+			        			html += '</div>';
 			        			//If Item has a description go ahead and add markup.
-			        			/*if(json.items[i].description){
+			        			if(json.items[i].description){
 			        				html += '<div class="row">\
 			        							<div class="description-wrap">\
 			        								<p class="description">\
@@ -106,7 +104,25 @@ var scFeed = function(method){
 			        								</p>\
 			        							</div>\
 			        						</div>';
-			        			}*/
+			        			}
+			        			html += '<div class="row">';
+			        			//If Item has a network go ahead and add markup.
+			        			if(json.items[i].network){
+			        				html += '<div class="description-wrap">\
+		        								<p class="description">\
+		        									<a href="'+json.items[i].social_link+'"><i class="fa fa-'+json.items[i].network+'"></i></a>\
+		        								</p>\
+		        							</div>';
+			        			}
+			        			//If Item has a network go ahead and add markup.
+			        			if(json.items[i].created){
+			        				html += '<div class="description-wrap">\
+		        								<p class="description">\
+		        									'+json.items[i].created+'\
+		        								</p>\
+		        							</div>';
+			        			}
+			        			html += '</div>';
 			          		html +='</div>';
 				        }
 	         		}
@@ -115,13 +131,6 @@ var scFeed = function(method){
 	                html +='</div></div>'
 	                //add the feed to the container div
 	                methods.settings.container.append(html);
-	                $("img.lazy").lazyload({
-					  event: "scrollstop",
-					  effect : "fadeIn"
-					});
-					$("img.lazy").error(function(){
-					        $(this).hide();
-					});
 	                methods.settings.container.find(".wrapper").freetile();
 	                privacy.settings.returnLoader();
 	                //The width controls how many columns to display
@@ -233,54 +242,67 @@ var scFeed = function(method){
 		         					var html='';
 		         					for(var i =1; i< json.items.length;i++){
 					        			html += '<div class="'+methods.settings.type+'-item">';
-					        			//If a item has an image url go ahead and add markup. 
-					        			if(json.items[i].image){
-					        				html += '<div class="row">\
-					        							<div class="image-wrap">\
-					        								<div class="image-hold">\
-					        									<img src="'+json.items[i].image+'" alt=""/>\
-					        								</div>\
-					        							</div>\
-					        						</div>';
-					        			}
-					        			//If Item has a username go ahead and add markup.
-					        			if(json.items[i].handle){
-					        				html += '<div class="row">\
-					        							<div class="description-wrap">\
-					        								<p class="description">\
-					        									<a href="'+json.items[i].from+'">@'+json.items[i].handle+'</a>\
-					        								</p>\
-					        							</div>\
-					        						</div>';
-					        			}
-					        			//If Item has a network go ahead and add markup.
-					        			if(json.items[i].network){
-					        				html += '<div class="row">\
-					        							<div class="description-wrap">\
+						        			//If a item has an image url go ahead and add markup. 
+						        			if(json.items[i].image){
+						        				html += '<div class="row">\
+						        							<div class="image-wrap">\
+						        								<div class="image-hold">\
+						        									<img src="'+json.items[i].image+'" alt=""/>\
+						        								</div>\
+						        							</div>\
+						        						</div>';
+						        			}
+						        			//If Item has a username go ahead and add markup.
+						        			html += '<div class="row">';
+						        			if(json.items[i].profile_image){
+						        				html += '<div class="profile-wrap">\
+						        								<div class="profile-hold">\
+						        									<img class="profile" src="'+json.items[i].profile_image+'" alt=""/>\
+						        								</div>\
+						        							</div>';
+						        			}
+						        			//If Item has a username go ahead and add markup.
+						        			if(json.items[i].handle){
+						        				html += '<div class="handle-wrap">\
+						        								<p class="handle">\
+						        									<a href="'+json.items[i].from+'">@'+json.items[i].handle+'</a>\
+						        								</p>\
+						        							</div>';
+						        			}
+						        			html += '</div>';
+						        			//If Item has a description go ahead and add markup.
+						        			if(json.items[i].description){
+						        				html += '<div class="row">\
+						        							<div class="description-wrap">\
+						        								<p class="description">\
+						        									'+json.items[i].description+'\
+						        								</p>\
+						        							</div>\
+						        						</div>';
+						        			}
+						        			html += '<div class="row">';
+						        			//If Item has a network go ahead and add markup.
+						        			if(json.items[i].network){
+						        				html += '<div class="description-wrap">\
 					        								<p class="description">\
 					        									<a href="'+json.items[i].social_link+'"><i class="fa fa-'+json.items[i].network+'"></i></a>\
 					        								</p>\
-					        							</div>\
-					        						</div>';
-					        			}
-					        			//If Item has a description go ahead and add markup.
-					        			/*if(json.items[i].description){
-					        				html += '<div class="row">\
-					        							<div class="description-wrap">\
+					        							</div>';
+						        			}
+						        			//If Item has a network go ahead and add markup.
+						        			if(json.items[i].created){
+						        				html += '<div class="description-wrap">\
 					        								<p class="description">\
-					        									'+json.items[i].description+'\
+					        									'+json.items[i].created+'\
 					        								</p>\
-					        							</div>\
-					        						</div>';
-					        			}*/
+					        							</div>';
+						        			}
+						        			html += '</div>';
 						          		html +='</div>';
 							        }
 							        return html;
 				         		}
 				         		$('.feed.light .wrapper').append(feeder());
-				         		$("img.lazy").error(function(){
-								        $(this).hide();
-								});
 				         		$('.'+methods.settings.type+'-item').css({
 				                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
 				                });

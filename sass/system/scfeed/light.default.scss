@@ -15,17 +15,59 @@
 	@include border-radius(5px);
 	//@include drop-shadow();
 	background: #fff;
+	.row:first-child{padding:0px;}
+	.row{padding:5px;}
 }
-.image-wrap{
-
-}
-.image-hold{
-
-}
+/*MAIN IMAGE STYLES*/
+.image-wrap{}
+.image-hold{}
 .image-hold img{
 	display: block;
 	width:100%;
 	height:auto;
 	max-height: 600px;
-
+}
+/*PROFILE IMAGE STYLE */
+.profile-wrap{
+	float:left;
+	position: relative;
+	min-height: 1px;
+}
+img.profile {
+	display: block;
+	width:40px;
+	height:auto;
+	@include border-radius(40px);
+}
+/*SOCIAL NETWORK HANDLE */
+.handle-wrap{
+	float:left;
+	position: relative;
+	min-height: 1px;
+	padding-left:5px;
+}
+p.handle{
+	font-family: 'Helvectica' sans-serif;
+	font-size: .7em;
+	color:#d7d7d7;
+	line-height: 40px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 100;
+	letter-spacing:.5px;
+	word-spacing:.5px;
+}
+p.handle a{color:#d7d7d7;}
+p.handle a:hover{color:#00E6E6;}
+p.handle a:visited{}
+/*SOCIAL NETWORK DESCRIPTION */
+p.description{
+	font-family: 'Helvectica' sans-serif;
+	font-size: .7em;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 100;
+	letter-spacing:.5px;
+	word-spacing:.5px;
+	color:#191919;
 }
