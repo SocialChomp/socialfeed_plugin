@@ -251,7 +251,6 @@ body {
   margin: 0 auto;
   display: block;
   position: relative;
-  background: #e6e6e6;
   /*MAIN IMAGE STYLES*/
   /*PROFILE IMAGE STYLE */
   /*SOCIAL NETWORK HANDLE */
@@ -295,15 +294,15 @@ body {
   .light.feed .profile-wrap {
     float: left;
     position: relative;
-    min-height: 40px;
-    min-width: 40px; }
+    min-height: 28px;
+    min-width: 28px; }
   .light.feed img.profile {
     display: block;
-    width: 40px;
+    max-width: 28px;
     height: auto;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box; }
@@ -316,7 +315,7 @@ body {
     font-family: 'Helvectica' sans-serif;
     font-size: .7em;
     color: #d7d7d7;
-    line-height: 40px;
+    line-height: 28px;
     font-style: normal;
     font-variant: normal;
     font-weight: 100;
@@ -367,16 +366,16 @@ body {
     letter-spacing: .5px;
     word-spacing: .5px; }
   .light.feed .profile-wrap .img-error {
-    height: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
+    height: 28px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box; }
     .light.feed .profile-wrap .img-error:after {
-      font-size: 20px;
-      height: 20px; }
+      font-size: 10px;
+      height: 10px; }
   .light.feed .image-wrap .img-error {
     height: 80px; }
     .light.feed .image-wrap .img-error:after {
@@ -487,15 +486,15 @@ body {
   .light.slideshow .profile-wrap {
     float: left;
     position: relative;
-    min-height: 40px;
-    min-width: 40px; }
+    min-height: 28px;
+    min-width: 28px; }
   .light.slideshow img.profile {
     display: block;
-    width: 40px;
+    max-width: 28px;
     height: auto;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box; }
@@ -508,7 +507,7 @@ body {
     font-family: 'Helvectica' sans-serif;
     font-size: .7em;
     color: #d7d7d7;
-    line-height: 40px;
+    line-height: 28px;
     font-style: normal;
     font-variant: normal;
     font-weight: 100;
@@ -559,16 +558,16 @@ body {
     letter-spacing: .5px;
     word-spacing: .5px; }
   .light.slideshow .profile-wrap .img-error {
-    height: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
+    height: 28px;
+    -webkit-border-radius: 28px;
+    -moz-border-radius: 28px;
+    border-radius: 28px;
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box; }
     .light.slideshow .profile-wrap .img-error:after {
-      font-size: 20px;
-      height: 20px; }
+      font-size: 10px;
+      height: 10px; }
   .light.slideshow .image-wrap .img-error {
     height: 80px; }
     .light.slideshow .image-wrap .img-error:after {

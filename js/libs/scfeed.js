@@ -13,13 +13,13 @@ var scFeed = function(method){
 			custom: function(){},
 			feedOptions: {
 				//does this use infinity scrolling
-				infinity:false,
+				infinity:true,
 				//should images open in a pop-up modal when clicked
 				modal:false,
 				//Set the number of columns per device
 				desktopColumns:4,
 				tabletColumns:3,
-				mobileColumns:2,
+				mobileColumns:3,
 				//Choose to only display one network or exlcude any networks. 
 				excludeNetworks:[],
 				includeNetworks:[],
@@ -151,7 +151,13 @@ var scFeed = function(method){
 					return methods.settings.feedOptions.tabletColumns;
 				}else if($(window).width()<=750){
 					//console.log('mobile');
-					return methods.settings.feedOptions.mobileColumns;
+					if(methods.settings.container.width()<=600 && methods.settings.feedOptions.mobileColumns >= 3){
+						if(methods.settings.container.width()<=400){
+							return 1;
+						}else{
+							return 2;
+						}
+					}else{return methods.settings.feedOptions.mobileColumns;}
 				}
 			},
 			/*ReturnLoader- checks the setting of the inifity and will return either a button or run a scroll script */
@@ -207,6 +213,65 @@ var scFeed = function(method){
 				//console.log(data);
 				return data;
 			},
+			parseString: function(str, network){
+				var results;
+					var plainstring;
+				    var plainstring = str.replace(/<a\b[^>]*>/gi,"");
+				    plainstring = str.replace(/<\/a>/gi, "");
+				    plainstring = str.replace('https://www.', 'https://');
+				    plainstring = str.replace('http://www.', 'http://');
+				if(network ==='twitter'){
+					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+				    text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+				    exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+	                text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>"); 
+	                exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
+	                text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+				    exp = /(^|\s)#(\w+)/g;
+				    text = plainstring.replace(exp, "$1<a href='https://twitter.com/search?q=%23$2' target='_blank'>#$2</a>");
+				    exp = /(^|\s)@(\w+)/g;
+				    text = plainstring.replace(exp, "$1<a href='https://www.twitter.com/$2' target='_blank'>@$2</a>");
+				    return text;
+				}else if(network ==='facebook'){
+					var text;
+					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "http://$1");
+					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
+					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					// exp = /(^|\s)#(\w+)/g;
+					// text = text.replace(exp, "$1<a href='https://plus.google.com/s/$2' target='_blank'>#$2</a>");
+					results = txt;
+				}else if(network ==='googlePlus'){
+					var text;
+					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
+					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
+					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
+					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					exp = /(^|\s)#(\w+)/g;
+					text = plainstring.replace(exp, "$1<a href='https://plus.google.com/s/$2' target='_blank'>#$2</a>");
+					results = txt;
+				}else if(network ==='instagram'){
+					var text;
+					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+					text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
+					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
+					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					exp = /(^|\s)@(\w+)/g;
+					text = plainstring.replace(exp, "$1<a href='http://www.instagram.com/$2' target='_blank'>@$2</a>");
+					results = txt;
+				}else{
+
+				}
+				return results
+			},
 			feeder: function(data,custom){
 				var json = privacy.settings.filterData(data);
 				//console.log(json);
@@ -246,7 +311,7 @@ var scFeed = function(method){
 		        				html += '<div class="row">\
 		        							<div class="description-wrap">\
 		        								<p class="description">\
-		        									'+json.items[i].description+'\
+		        									'+privacy.settings.parseString(json.items[i].description, json.items[i].network)+'\
 		        								</p>\
 		        							</div>\
 		        						</div>';
@@ -273,7 +338,6 @@ var scFeed = function(method){
 				}
 				return html;
 			}
-
 		},
 	};
 	//SET METHODS AND SETTINGS

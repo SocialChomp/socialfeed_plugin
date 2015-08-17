@@ -34,14 +34,14 @@
 .profile-wrap{
 	float:left;
 	position: relative;
-	min-height: 40px;
-	min-width: 40px;
+	min-height: 28px;
+	min-width: 28px;
 }
 img.profile {
 	display: block;
-	width:40px;
+	max-width:28px;
 	height:auto;
-	@include border-radius(40px);
+	@include border-radius(28px);
 }
 /*SOCIAL NETWORK HANDLE */
 .handle-wrap{
@@ -54,7 +54,7 @@ p.handle{
 	font-family: 'Helvectica' sans-serif;
 	font-size: .7em;
 	color:#d7d7d7;
-	line-height: 40px;
+	line-height: 28px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 100;
@@ -112,7 +112,7 @@ p.created{
 	word-spacing:.5px;
 }
 /*IMAGE ERROR HANDLING*/
-.profile-wrap .img-error{height:40px;@include border-radius(40px);&:after{font-size: 20px;height:20px;}}
+.profile-wrap .img-error{height:28px;@include border-radius(28px);&:after{font-size: 10px;height:10px;}}
 .image-wrap .img-error{height:80px;&:after{font-size: 50px;height:50px;}}
 .img-error{
 	position: relative;
