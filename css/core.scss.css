@@ -255,7 +255,10 @@ body {
   /*MAIN IMAGE STYLES*/
   /*PROFILE IMAGE STYLE */
   /*SOCIAL NETWORK HANDLE */
-  /*SOCIAL NETWORK DESCRIPTION */ }
+  /*SOCIAL NETWORK DESCRIPTION */
+  /* NETWORK ICON */
+  /* CREATED DATE */
+  /*IMAGE ERROR HANDLING*/ }
   .light.feed .feed-item {
     width: 200px;
     position: relative;
@@ -281,6 +284,9 @@ body {
       padding: 0px; }
     .light.feed .feed-item .row {
       padding: 5px; }
+  .light.feed .image-wrap {
+    display: block;
+    min-height: 80px; }
   .light.feed .image-hold img {
     display: block;
     width: 100%;
@@ -289,7 +295,8 @@ body {
   .light.feed .profile-wrap {
     float: left;
     position: relative;
-    min-height: 1px; }
+    min-height: 40px;
+    min-width: 40px; }
   .light.feed img.profile {
     display: block;
     width: 40px;
@@ -328,11 +335,62 @@ body {
     letter-spacing: .5px;
     word-spacing: .5px;
     color: #191919; }
+  .light.feed .network-wrap {
+    float: left;
+    position: relative;
+    min-height: 1px; }
+  .light.feed p.network {
+    font-family: 'Helvectica' sans-serif;
+    font-size: 1em;
+    color: #d7d7d7;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    letter-spacing: .5px;
+    word-spacing: .5px; }
+  .light.feed p.network a {
+    color: #d7d7d7; }
+  .light.feed p.network a:hover {
+    color: #00E6E6; }
+  .light.feed .created-wrap {
+    float: left;
+    position: relative;
+    padding-left: 5px;
+    min-height: 1px; }
+  .light.feed p.created {
+    font-family: 'Helvectica' sans-serif;
+    font-size: .65em;
+    color: #d7d7d7;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    letter-spacing: .5px;
+    word-spacing: .5px; }
+  .light.feed .profile-wrap .img-error {
+    height: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+  .light.feed .image-wrap .img-error {
+    height: 80px; }
+  .light.feed .img-error {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%; }
+  .light.feed .twitter .img-error {
+    background: #00aced; }
 .light.slideshow {
   /*MAIN IMAGE STYLES*/
   /*PROFILE IMAGE STYLE */
   /*SOCIAL NETWORK HANDLE */
-  /*SOCIAL NETWORK DESCRIPTION */ }
+  /*SOCIAL NETWORK DESCRIPTION */
+  /* NETWORK ICON */
+  /* CREATED DATE */
+  /*IMAGE ERROR HANDLING*/ }
   .light.slideshow .feed-item {
     width: 200px;
     position: relative;
@@ -358,6 +416,9 @@ body {
       padding: 0px; }
     .light.slideshow .feed-item .row {
       padding: 5px; }
+  .light.slideshow .image-wrap {
+    display: block;
+    min-height: 80px; }
   .light.slideshow .image-hold img {
     display: block;
     width: 100%;
@@ -366,7 +427,8 @@ body {
   .light.slideshow .profile-wrap {
     float: left;
     position: relative;
-    min-height: 1px; }
+    min-height: 40px;
+    min-width: 40px; }
   .light.slideshow img.profile {
     display: block;
     width: 40px;
@@ -405,6 +467,54 @@ body {
     letter-spacing: .5px;
     word-spacing: .5px;
     color: #191919; }
+  .light.slideshow .network-wrap {
+    float: left;
+    position: relative;
+    min-height: 1px; }
+  .light.slideshow p.network {
+    font-family: 'Helvectica' sans-serif;
+    font-size: 1em;
+    color: #d7d7d7;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    letter-spacing: .5px;
+    word-spacing: .5px; }
+  .light.slideshow p.network a {
+    color: #d7d7d7; }
+  .light.slideshow p.network a:hover {
+    color: #00E6E6; }
+  .light.slideshow .created-wrap {
+    float: left;
+    position: relative;
+    padding-left: 5px;
+    min-height: 1px; }
+  .light.slideshow p.created {
+    font-family: 'Helvectica' sans-serif;
+    font-size: .65em;
+    color: #d7d7d7;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 100;
+    letter-spacing: .5px;
+    word-spacing: .5px; }
+  .light.slideshow .profile-wrap .img-error {
+    height: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box; }
+  .light.slideshow .image-wrap .img-error {
+    height: 80px; }
+  .light.slideshow .img-error {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%; }
+  .light.slideshow .twitter .img-error {
+    background: #00aced; }
 
 .fda {
   border: 1px solid #cacaca;
