@@ -283,6 +283,14 @@ body {
       padding: 0px; }
     .light.feed .feed-item .row {
       padding: 5px; }
+    .light.feed .feed-item a {
+      color: #004d4d;
+      -webkit-transition: all 300ms;
+      -moz-transition: all 300ms;
+      -ms-transition: all 300ms;
+      -o-transition: all 300ms; }
+    .light.feed .feed-item a:hover {
+      color: #00E6E6; }
   .light.feed .image-wrap {
     display: block;
     min-height: 80px; }
@@ -475,6 +483,14 @@ body {
       padding: 0px; }
     .light.slideshow .feed-item .row {
       padding: 5px; }
+    .light.slideshow .feed-item a {
+      color: #004d4d;
+      -webkit-transition: all 300ms;
+      -moz-transition: all 300ms;
+      -ms-transition: all 300ms;
+      -o-transition: all 300ms; }
+    .light.slideshow .feed-item a:hover {
+      color: #00E6E6; }
   .light.slideshow .image-wrap {
     display: block;
     min-height: 80px; }
