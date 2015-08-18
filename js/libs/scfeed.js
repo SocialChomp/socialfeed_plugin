@@ -214,59 +214,60 @@ var scFeed = function(method){
 				return data;
 			},
 			parseString: function(str, network){
-				var results;
 					var plainstring;
 				    var plainstring = str.replace(/<a\b[^>]*>/gi,"");
 				    plainstring = str.replace(/<\/a>/gi, "");
 				    plainstring = str.replace('https://www.', 'https://');
 				    plainstring = str.replace('http://www.', 'http://');
+				    var results = plainstring;
 				if(network ==='twitter'){
+					var text;
 					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-				    text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+				    text = results.replace(exp, "<a href='$1' target='_blank'>$1</a>");
 				    exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-	                text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>"); 
+	                text = text.replace(exp, "<a href='http://$1' target='_blank'>$1</a>"); 
 	                exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
-	                text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+	                text = text.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
 				    exp = /(^|\s)#(\w+)/g;
-				    text = plainstring.replace(exp, "$1<a href='https://twitter.com/search?q=%23$2' target='_blank'>#$2</a>");
+				    text = text.replace(exp, "$1<a href='https://twitter.com/search?q=%23$2' target='_blank'>#$2</a>");
 				    exp = /(^|\s)@(\w+)/g;
-				    text = plainstring.replace(exp, "$1<a href='https://www.twitter.com/$2' target='_blank'>@$2</a>");
-				    return text;
+				    text = text.replace(exp, "$1<a href='https://www.twitter.com/$2' target='_blank'>@$2</a>");
+				    results = text;
 				}else if(network ==='facebook'){
 					var text;
 					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					text = results.replace(exp, "<a href='$1' target='_blank'>$1</a>");
 					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "http://$1");
+					text = text.replace(exp, "http://$1");
 					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
-					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					text = text.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
 					// exp = /(^|\s)#(\w+)/g;
 					// text = text.replace(exp, "$1<a href='https://plus.google.com/s/$2' target='_blank'>#$2</a>");
-					results = txt;
+					results = text;
 				}else if(network ==='googlePlus'){
 					var text;
 					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					text = results.replace(exp, "<a href='$1' target='_blank'>$1</a>");
 					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
+					text = text.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
 					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
-					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					text = text.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
 					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
-					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					text = text.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
 					exp = /(^|\s)#(\w+)/g;
-					text = plainstring.replace(exp, "$1<a href='https://plus.google.com/s/$2' target='_blank'>#$2</a>");
-					results = txt;
+					text = text.replace(exp, "$1<a href='https://plus.google.com/s/$2' target='_blank'>#$2</a>");
+					results = text;
 				}else if(network ==='instagram'){
 					var text;
 					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+					text = results.replace(exp, "<a href='$1' target='_blank'>$1</a>");
 					exp = /(www[.][-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-					text = plainstring.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
+					text = text.replace(exp, "<a href='http://$1' target='_blank'>$1</a>");
 					exp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})([ .-]?)([0-9]{4})/g;
-					text = plainstring.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
+					text = text.replace(exp, "<a href='tel:$1$3$5'>$&</a>");
 					exp = /(^|\s)@(\w+)/g;
-					text = plainstring.replace(exp, "$1<a href='http://www.instagram.com/$2' target='_blank'>@$2</a>");
-					results = txt;
+					text = text.replace(exp, "$1<a href='http://www.instagram.com/$2' target='_blank'>@$2</a>");
+					results = text;
 				}else{
 
 				}
