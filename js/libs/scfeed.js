@@ -1,5 +1,9 @@
 
 var scFeed = function(method){
+	//CREATES A METHOD FOR CHECKING MANY STRINGS AGAINST ONE.
+	Array.prototype.contains = function(obj) {
+    	return this.indexOf(obj) > -1;
+	};
 	var methods = {
 		settings: {
 			url:'',
@@ -12,6 +16,8 @@ var scFeed = function(method){
 			coverUrl:'',
 			custom: function(){},
 			feedOptions: {
+				//tabs that allow you to filter out networks different from exclusion
+				filter: true,
 				//does this use infinity scrolling
 				infinity:true,
 				//should images open in a pop-up modal when clicked
@@ -62,13 +68,18 @@ var scFeed = function(method){
 	            ,success: function (json) {
 	            	console.log(json);
 	            	//INT the feed
-	            	var html='';
+	            	if(methods.settings.feedOptions.filter){
+			        	var html=privacy.settings.getNetworks();			
+        			}else{
+        				var html="";
+        			}
 	         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'"><div class="wrapper">';
 	                /*Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.*/
 	                html +=privacy.settings.feeder(json);
 	                html +='</div></div>'
 	                //add the feed to the container div
 	                methods.settings.container.append(html);
+	                privacy.settings.updateNetworks();
 	                //settings based on infinity
 	                privacy.settings.returnLoader();
 	                //The width controls how many columns to display
@@ -96,8 +107,7 @@ var scFeed = function(method){
 	            error: function(response, error){
 	            	console.log(response.statusText);
 	            }
-			});
-			
+			});	
 		},
 		//Slideshow type generates a feed and uses slideshowOptions for customizing.
 		slideshow: function(options){
@@ -121,6 +131,7 @@ var scFeed = function(method){
 	//START PRIVATE FUNCTIONS HERE
 	var privacy = {
 		settings: {
+			networks:[],
 			page:2,
 			lastPage:false,
 			requestInProcess: false,
@@ -210,16 +221,16 @@ var scFeed = function(method){
 			},
 			/*FilterData- returns Ojbects and arrays of the ajax data based on the inclusions and exclusions*/
 			filterData: function(data){
-				//console.log(data);
 				return data;
 			},
+			/*ParseString- Depending on what network it came from the description http,@,# will be converted to links */
 			parseString: function(str, network){
-					var plainstring;
-				    var plainstring = str.replace(/<a\b[^>]*>/gi,"");
-				    plainstring = str.replace(/<\/a>/gi, "");
-				    plainstring = str.replace('https://www.', 'https://');
-				    plainstring = str.replace('http://www.', 'http://');
-				    var results = plainstring;
+				var plainstring;
+			    var plainstring = str.replace(/<a\b[^>]*>/gi,"");
+			    plainstring = str.replace(/<\/a>/gi, "");
+			    plainstring = str.replace('https://www.', 'https://');
+			    plainstring = str.replace('http://www.', 'http://');
+			    var results = plainstring;
 				if(network ==='twitter'){
 					var text;
 					var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
@@ -273,6 +284,7 @@ var scFeed = function(method){
 				}
 				return results
 			},
+			/*Feeder- the html of each item in the feed*/
 			feeder: function(data,custom){
 				var json = privacy.settings.filterData(data);
 				//console.log(json);
@@ -318,6 +330,11 @@ var scFeed = function(method){
 		        						</div>';
 		        			}
 		        			html += '<div class="row">';
+		        			//add network to the networks array if its not already there
+		        			if(!privacy.settings.networks.contains(json.items[i].network)){
+		        				privacy.settings.networks.push(json.items[i].network);
+		        				privacy.settings.updateNetworks();
+		        			}
 		        			//If Item has a network go ahead and add markup.
 		        			if(json.items[i].network){
 		        				html += '<div class="network-wrap">\
@@ -338,6 +355,18 @@ var scFeed = function(method){
 		          		html +='</div>';
 				}
 				return html;
+			},
+			getNetworks: function(){
+				var html="<div class='filter-items'><div class='filter-wrap'></div><div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div></div>";
+				return html;
+			},
+			updateNetworks: function(){
+				var networks = privacy.settings.networks;
+				var lastchild = networks[networks.length - 1];
+				//console.log(lastchild);
+				var html="";
+				html +="<button class='"+lastchild+" btn-filter active'></button>";
+				$('.filter-items .filter-wrap').append(html);
 			}
 		},
 	};
