@@ -103,7 +103,6 @@ var scFeed = function(method){
 					  		$('.'+methods.settings.type+'-item').css({
 			                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
 			                });
-			               /*methods.settings.container.find('.'+methods.settings.type+'.'+methods.settings.theme).css({'width':methods.settings.container.parent().width()*privacy.settings.deviceColumn()+'px'});*/
 			                methods.settings.container.find(".wrapper").freetile();
 						}, 200);
 					});
@@ -378,6 +377,7 @@ var scFeed = function(method){
 			},
 			/*UpdateNetworks- Available feed-items for each social network are found as you scroll and when they are found you are able to filter through them.*/
 			updateNetworks: function(){
+				var timer;
 				var networks = privacy.settings.networks;
 				var lastchild = networks[networks.length - 1];
 				//console.log(lastchild);
@@ -413,7 +413,10 @@ var scFeed = function(method){
 		        			$('.facebook.feed-item').toggleClass('not-active');
 		        		}
 		        	}
-		        	window.setTimeout(methods.settings.container.find(".wrapper").freetile(),300);
+		        	clearTimeout(timer);
+				  		timer = setTimeout(function(){ 
+			                methods.settings.container.find(".wrapper").freetile();
+						}, 300);
 		        	privacy.settings.measureWindow();
 	            });
 			},
