@@ -10,8 +10,8 @@ var scFeed = function(method){
 			container:$(".scfeed"),
 			theme:'light',
 			type:'feed',
-			hasTitle:false,
-			hasCover:false,
+			hasTitle:true,
+			hasCover:true,
 			title:'',
 			coverUrl:'',
 			custom: function(){},
@@ -68,10 +68,15 @@ var scFeed = function(method){
 	            ,success: function (json) {
 	            	console.log(json);
 	            	//INT the feed
+	            	var html="";
+        			if(methods.settings.hasCover){
+			        	html +='<div class="row"><img src="'+json.stream.image+'" class="cover-img"/></div>';		
+        			}
+        			if(methods.settings.hasTitle){
+			        	html +='<div class="row"><h1>'+json.stream.title+'</h1></div>';		
+        			}
 	            	if(methods.settings.feedOptions.filter){
-			        	var html=privacy.settings.getNetworks();			
-        			}else{
-        				var html="";
+			        	html +=privacy.settings.getNetworks();			
         			}
 	         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'"><div class="wrapper">';
 	                /*Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.*/
@@ -90,7 +95,6 @@ var scFeed = function(method){
 	                	$(this).after("<div class='img-error'></div>").remove();
 	                });
 	                methods.settings.container.find(".wrapper").freetile();
-	                /*methods.settings.container.find('.'+methods.settings.type+'.'+methods.settings.theme).css({'width':methods.settings.container.parent().width()*privacy.settings.deviceColumn()+'px'});*/
 	                //When a user finish resizing the window check to see if the columns are displaying properly
 	                var timer;
 					$(window).bind('resize', function() {
@@ -103,6 +107,7 @@ var scFeed = function(method){
 			                methods.settings.container.find(".wrapper").freetile();
 						}, 200);
 					});
+					
 	            },
 	            error: function(response, error){
 	            	console.log(response.statusText);
@@ -132,6 +137,13 @@ var scFeed = function(method){
 	var privacy = {
 		settings: {
 			networks:[],
+			networkFilter:{
+				twitter:true,
+				instagram:true,
+				facebook:true,
+				googlePlus:true,
+				tumblr:true
+			},
 			page:2,
 			lastPage:false,
 			requestInProcess: false,
@@ -171,13 +183,17 @@ var scFeed = function(method){
 					}else{return methods.settings.feedOptions.mobileColumns;}
 				}
 			},
+			/*MeasureWindow- check the container position in the window and run the append function*/
+			measureWindow: function(){
+				if($(window).scrollTop() >= methods.settings.container.offset().top + methods.settings.container.outerHeight() - window.innerHeight) {
+		          privacy.settings.appendFeedItems();
+		        }
+			},
 			/*ReturnLoader- checks the setting of the inifity and will return either a button or run a scroll script */
 			returnLoader: function(){
 				if(methods.settings.feedOptions.infinity){
 					$(window).bind('scroll', function() {
-					        if($(window).scrollTop() >= methods.settings.container.offset().top + methods.settings.container.outerHeight() - window.innerHeight) {
-					          privacy.settings.appendFeedItems();
-					        }
+						privacy.settings.measureWindow();
 					});
 				}else{
 					var loadMore="<button class='load-more'>Load More</button>";
@@ -206,14 +222,13 @@ var scFeed = function(method){
 				                $('.'+methods.settings.type+'-item img').error(function(){
 				                	$(this).after("<div class='img-error'></div>").remove();
 				                });
-				         		$(".scfeed .wrapper").freetile();
+				         		methods.settings.container.find(".wrapper").freetile();
 				         		privacy.settings.requestInProcess = false;
 				            	if(json.items.length<25){
 				            		privacy.settings.lastPage = true;
 				            	}
 				            }
 				        });
-						
 					}else{
 						console.log('all content has loaded');
 					}
@@ -290,7 +305,7 @@ var scFeed = function(method){
 				//console.log(json);
 				var html='';
 				for(var i =1; i< json.items.length;i++){
-		        		html += '<div class="'+json.items[i].network+' '+methods.settings.type+'-item active">';
+		        		html += '<div class="'+json.items[i].network+' '+methods.settings.type+'-item '+privacy.settings.filterByNetwork(json.items[i].network)+'">';
 		        			//If a item has an image url go ahead and add markup. 
 		        			if(json.items[i].image){
 		        				html += '<div class="row">\
@@ -356,10 +371,12 @@ var scFeed = function(method){
 				}
 				return html;
 			},
+			/*GetNetwork- Container div for the filter option*/
 			getNetworks: function(){
 				var html="<div class='filter-items'><div class='filter-wrap'></div><div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div></div>";
 				return html;
 			},
+			/*UpdateNetworks- Available feed-items for each social network are found as you scroll and when they are found you are able to filter through them.*/
 			updateNetworks: function(){
 				var networks = privacy.settings.networks;
 				var lastchild = networks[networks.length - 1];
@@ -367,6 +384,45 @@ var scFeed = function(method){
 				var html="";
 				html +="<button class='"+lastchild+" btn-filter active'></button>";
 				$('.filter-items .filter-wrap').append(html);
+				//HANDLE ACTIONS
+				$('.btn-filter').unbind('click');
+				$('.btn-filter').click(function(){
+		        	$(this).toggleClass('active');
+		        	if($(this).hasClass('twitter')){
+		        		if(privacy.settings.networkFilter.twitter){
+		        			privacy.settings.networkFilter.twitter = false;
+		        			$('.twitter.feed-item').toggleClass('not-active');
+		        		}else{
+		        			privacy.settings.networkFilter.twitter = true;
+		        			$('.twitter.feed-item').toggleClass('not-active');
+		        		}
+		        	}else if($(this).hasClass('instagram')){
+		        		if(privacy.settings.networkFilter.instagram){
+		        			privacy.settings.networkFilter.instagram = false;
+		        			$('.instagram.feed-item').toggleClass('not-active');
+		        		}else{
+		        			privacy.settings.networkFilter.instagram = true;
+		        			$('.instagram.feed-item').toggleClass('not-active');
+		        		}
+		        	}else if($(this).hasClass('facebook')){
+		        		if(privacy.settings.networkFilter.facebook){
+		        			privacy.settings.networkFilter.facebook = false;
+		        			$('.facebook.feed-item').toggleClass('not-active');
+		        		}else{
+		        			privacy.settings.networkFilter.facebook = true;
+		        			$('.facebook.feed-item').toggleClass('not-active');
+		        		}
+		        	}
+		        	window.setTimeout(methods.settings.container.find(".wrapper").freetile(),300);
+		        	privacy.settings.measureWindow();
+	            });
+			},
+			/*FilterByNetwork- In case user filters by a network it will automatically add the not-active class to anything on the screen but add it to anything appended on screen.*/
+			filterByNetwork: function(network){
+				var setTO = _.get(privacy.settings.networkFilter, network);
+				if(!setTO){
+					return 'not-active';
+				}else{return '';}
 			}
 		},
 	};

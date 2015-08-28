@@ -1,4 +1,5 @@
 define(function (require) {
+	require('lodash.min');
 	//require('masonry.pkgd.min');
 	require('imagesloaded.pkgd.min');
 	//require('iscroll');
