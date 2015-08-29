@@ -73,12 +73,14 @@ var scFeed = function(method){
 			        	html +='<div class="row"><img src="'+json.stream.image+'" class="cover-img"/></div>';		
         			}
         			if(methods.settings.hasTitle){
-			        	html +='<div class="row"><h1>'+json.stream.title+'</h1></div>';		
+			        	html +='<div class="row"><h1 class="feed-title">'+json.stream.title+'</h1></div>';		
         			}
 	            	if(methods.settings.feedOptions.filter){
 			        	html +=privacy.settings.getNetworks();			
         			}
-	         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'"><div class="wrapper">';
+	         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'">\
+	         		<div class="overlay"></div>\
+	         		<div class="wrapper">';
 	                /*Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.*/
 	                html +=privacy.settings.feeder(json);
 	                html +='</div></div>'
@@ -235,6 +237,13 @@ var scFeed = function(method){
 			},
 			/*FilterData- returns Ojbects and arrays of the ajax data based on the inclusions and exclusions*/
 			filterData: function(data){
+				if(methods.settings.feedOptions.excludeProperties.length>=1){
+
+				}else if (methods.settings.feedOptions.includeProperties.length>=1){
+
+				}else if(_.without(methods.settings.feedOptions.excludeProperties,methods.settings.feedOptions.includeProperties).length<=0){
+					$.error( 'excludeProperties can not contain the same value as includeProperties');
+				}
 				return data;
 			},
 			/*ParseString- Depending on what network it came from the description http,@,# will be converted to links */
@@ -372,7 +381,7 @@ var scFeed = function(method){
 			},
 			/*GetNetwork- Container div for the filter option*/
 			getNetworks: function(){
-				var html="<div class='filter-items'><div class='filter-wrap'></div><div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div></div>";
+				var html="<div class='filter-items'><div class='filter-wrap'></div><!--<div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div>--></div>";
 				return html;
 			},
 			/*UpdateNetworks- Available feed-items for each social network are found as you scroll and when they are found you are able to filter through them.*/
@@ -382,7 +391,7 @@ var scFeed = function(method){
 				var lastchild = networks[networks.length - 1];
 				//console.log(lastchild);
 				var html="";
-				html +="<button class='"+lastchild+" btn-filter active'></button>";
+				html +="<a href='#' class='"+lastchild+" btn-filter active'></a>";
 				$('.filter-items .filter-wrap').append(html);
 				//HANDLE ACTIONS
 				$('.btn-filter').unbind('click');

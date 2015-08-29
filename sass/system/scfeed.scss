@@ -97,6 +97,18 @@
 }
 
 //GLOBALS
+h1.feed-title{
+	font-family: 'Helvectica' sans-serif;
+	font-size: 28px;
+	padding:5px 0px;
+	color:darken(#d7d7d7,40%);
+	line-height: 30px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 100;
+	letter-spacing:.5px;
+	word-spacing:.5px;
+}
 .cover-img{
 	width:100%;
 	height:auto;
@@ -109,8 +121,8 @@
 .filter-wrap{text-align: center;}
 p.filter-by{color:#d7d7d7;text-align: center; font-size: .7em;font-family: 'Helvectica' sans-serif;padding-top:5px;}
 //buttons
-button.btn-filter+button.btn-filter{margin-left:5px;}
-button.btn-filter{
+a.btn-filter+a.btn-filter{margin-left:5px;}
+a.btn-filter{
 	float: none;
 	display: inline-block;
 	vertical-align: top;

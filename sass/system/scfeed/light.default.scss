@@ -170,3 +170,23 @@ p.created{
 	background: #32506d;
 	&:after{content: "\f173"; color:lighten(#32506d,20%);}
 }
+//
+.overlay{
+	position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(#e6e6e6,.5);
+    @include transition('background-color 300ms,height 300ms');
+    z-index: 99;
+    height: 0;
+    width: 100%;
+}
+.overlay.active {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(#e6e6e6,.5);
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+}

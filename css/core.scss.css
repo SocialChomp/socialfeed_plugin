@@ -460,6 +460,26 @@ body {
     .light.feed .tumblr .img-error:after {
       content: "\f173";
       color: #5483b1; }
+  .light.feed .overlay {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(230, 230, 230, 0.5);
+    -webkit-transition: background-color 300ms,height 300ms;
+    -moz-transition: background-color 300ms,height 300ms;
+    -ms-transition: background-color 300ms,height 300ms;
+    -o-transition: background-color 300ms,height 300ms;
+    z-index: 99;
+    height: 0;
+    width: 100%; }
+  .light.feed .overlay.active {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(230, 230, 230, 0.5);
+    z-index: 99;
+    height: 100%;
+    width: 100%; }
 .light.slideshow {
   /*MAIN IMAGE STYLES*/
   /*PROFILE IMAGE STYLE */
@@ -670,6 +690,38 @@ body {
     .light.slideshow .tumblr .img-error:after {
       content: "\f173";
       color: #5483b1; }
+  .light.slideshow .overlay {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(230, 230, 230, 0.5);
+    -webkit-transition: background-color 300ms,height 300ms;
+    -moz-transition: background-color 300ms,height 300ms;
+    -ms-transition: background-color 300ms,height 300ms;
+    -o-transition: background-color 300ms,height 300ms;
+    z-index: 99;
+    height: 0;
+    width: 100%; }
+  .light.slideshow .overlay.active {
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    background-color: rgba(230, 230, 230, 0.5);
+    z-index: 99;
+    height: 100%;
+    width: 100%; }
+
+h1.feed-title {
+  font-family: 'Helvectica' sans-serif;
+  font-size: 28px;
+  padding: 5px 0px;
+  color: #717171;
+  line-height: 30px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+  letter-spacing: .5px;
+  word-spacing: .5px; }
 
 .cover-img {
   width: 100%;
@@ -690,10 +742,10 @@ p.filter-by {
   font-family: 'Helvectica' sans-serif;
   padding-top: 5px; }
 
-button.btn-filter + button.btn-filter {
+a.btn-filter + a.btn-filter {
   margin-left: 5px; }
 
-button.btn-filter {
+a.btn-filter {
   float: none;
   display: inline-block;
   vertical-align: top;
@@ -714,7 +766,7 @@ button.btn-filter {
   -o-transition: background-color 300ms;
   width: 30px;
   height: 30px; }
-  button.btn-filter:after {
+  a.btn-filter:after {
     font-size: 20px;
     height: 20px;
     font-family: 'FontAwesome';
