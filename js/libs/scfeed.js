@@ -27,16 +27,17 @@ var scFeed = function(method){
 				tabletColumns:3,
 				mobileColumns:3,
 				//Choose to only display one network or exlcude any networks. 
-				excludeNetworks:[],
-				includeNetworks:[],
+				//excludeNetworks:[],
+				//includeNetworks:[],
 				//Choose to only display one property or exlcude any properties.
+				/*PROPERTIES image,profile image, handle,description*/
 				excludeProperties:[],
 				includeProperties:[],
 			},
 			slideshowOptions: {
 				//Choose to only display one network or exlcude any networks. 
-				excludeNetworks:[],
-				includeNetworks:[],
+				//excludeNetworks:[],
+				//includeNetworks:[],
 				//Choose to only display one property or exlcude any properties.
 				excludeProperties:[],
 				includeProperties:[],
@@ -237,12 +238,39 @@ var scFeed = function(method){
 			},
 			/*FilterData- returns Ojbects and arrays of the ajax data based on the inclusions and exclusions*/
 			filterData: function(data){
-				if(methods.settings.feedOptions.excludeProperties.length>=1){
-
-				}else if (methods.settings.feedOptions.includeProperties.length>=1){
-
-				}else if(_.without(methods.settings.feedOptions.excludeProperties,methods.settings.feedOptions.includeProperties).length<=0){
-					$.error( 'excludeProperties can not contain the same value as includeProperties');
+				//console.log(methods.settings.feedOptions.includeProperties.length);
+				if(methods.settings.feedOptions.excludeProperties && !methods.settings.feedOptions.includeProperties){
+					if(methods.settings.feedOptions.excludeProperties.length>=1){
+						//console.log("excludeProperties");
+						data.items.forEach(function(n){
+							methods.settings.feedOptions.excludeProperties.forEach(function(exclude){
+								delete n[exclude];
+							});
+						});
+					}
+				}else if(methods.settings.feedOptions.includeProperties && !methods.settings.feedOptions.excludeProperties){
+					if(methods.settings.feedOptions.includeProperties.length>=1){
+						//console.log("includeProperties");
+						data.items.forEach(function(n){
+							methods.settings.feedOptions.includeProperties.forEach(function(include){
+								for(var i in n){
+									if(i!==include && i!=="network"){
+										delete n[i];
+									};
+									if(!n[include]){
+										delete n;
+									}
+								}
+							});
+						});
+					}
+				}else if(methods.settings.feedOptions.excludeProperties && methods.settings.feedOptions.includeProperties){
+						if(methods.settings.feedOptions.includeProperties.length>=1 && methods.settings.feedOptions.excludeProperties.length>=1){
+							$.error( 'You can not use both includeProperties and excludeProperties.');
+							if(_.xor(methods.settings.feedOptions.excludeProperties,methods.settings.feedOptions.includeProperties).length===0){
+								$.error( 'excludeProperties can not contain the same value as includeProperties');
+							}
+						}
 				}
 				return data;
 			},
@@ -313,6 +341,7 @@ var scFeed = function(method){
 				//console.log(json);
 				var html='';
 				for(var i =1; i< json.items.length;i++){
+					if(json.items[i].image ||(!json.items[i].image && json.items[i].description)){
 		        		html += '<div class="'+json.items[i].network+' '+methods.settings.type+'-item '+privacy.settings.filterByNetwork(json.items[i].network)+'">';
 		        			//If a item has an image url go ahead and add markup. 
 		        			if(json.items[i].image){
@@ -376,11 +405,13 @@ var scFeed = function(method){
 		        			}
 		        			html += '</div>';
 		          		html +='</div>';
+		          	}
 				}
 				return html;
 			},
 			/*GetNetwork- Container div for the filter option*/
 			getNetworks: function(){
+				console.log("getting networks");
 				var html="<div class='filter-items'><div class='filter-wrap'></div><!--<div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div>--></div>";
 				return html;
 			},

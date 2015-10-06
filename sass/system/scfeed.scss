@@ -1,4 +1,4 @@
-
+@import 'scfeed/pace';
 .light{
 	&.feed{
 		margin: 0 auto;
@@ -116,6 +116,7 @@ h1.feed-title{
 }
 .filter-items {
     border: 1px solid #e6e6e6;
+    background-color: #efefef;
     padding: 5px;
 }
 .filter-wrap{text-align: center;}
