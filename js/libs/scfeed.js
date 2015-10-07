@@ -252,16 +252,13 @@ var scFeed = function(method){
 					if(methods.settings.feedOptions.includeProperties.length>=1){
 						//console.log("includeProperties");
 						data.items.forEach(function(n){
-							methods.settings.feedOptions.includeProperties.forEach(function(include){
-								for(var i in n){
-									if(i!==include && i!=="network"){
-										delete n[i];
-									};
-									if(!n[include]){
-										delete n;
-									}
+							for(var i in n){
+								if (methods.settings.feedOptions.includeProperties.indexOf(i) > -1) {
+										
+								}else if(i!=="network"){
+									delete n[i];
 								}
-							});
+							}
 						});
 					}
 				}else if(methods.settings.feedOptions.excludeProperties && methods.settings.feedOptions.includeProperties){

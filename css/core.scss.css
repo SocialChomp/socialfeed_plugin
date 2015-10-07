@@ -399,7 +399,9 @@ body {
     float: left;
     position: relative;
     min-height: 28px;
-    min-width: 28px; }
+    min-width: 28px;
+    padding-left: 5px;
+    padding-top: 5px; }
   .light.feed img.profile {
     display: block;
     max-width: 28px;
@@ -629,7 +631,9 @@ body {
     float: left;
     position: relative;
     min-height: 28px;
-    min-width: 28px; }
+    min-width: 28px;
+    padding-left: 5px;
+    padding-top: 5px; }
   .light.slideshow img.profile {
     display: block;
     max-width: 28px;
