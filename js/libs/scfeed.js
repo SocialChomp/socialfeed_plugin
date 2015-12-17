@@ -255,7 +255,7 @@ var scFeed = function(method){
 							for(var i in n){
 								if (methods.settings.feedOptions.includeProperties.indexOf(i) > -1) {
 										
-								}else if(i!=="network"){
+								}else if(i!=="network" && i!=="social_link"){
 									delete n[i];
 								}
 							}
