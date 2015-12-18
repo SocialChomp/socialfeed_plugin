@@ -7,37 +7,45 @@ Social Chomp aggregates social media content from searches and hashtags. Pulling
 
     scFeed({
 	    url:'https://api.socialchomp.com/s/55cf690b29b0cae564e87f65
-	    apiKey=ed6336508a42f877644bc86381aedef2a5a1d66e'
+	    apiKey=sc_apikey'
 	});
 **Requirements**
 
  - moment.js (handles feed time references) 
  - lodash.js (handles JSON
  - pace.js (preloader) 
- - freetile.js (feed tiling only required in feed mode.)
+ - freetile.js (handles feed tiling *only required in feed mode.*)
+ - hammer.js (handles touch events *only required in slideshow mode.*)
 
+**Installation**
 
+ - [Creating your first feed in SocialChomp.](#Creating-your-first-feed-in-SocialChomp)
+ - Creating the JSON feed.
+ - Adding custom feed to your own website.
 
 **API Reference**
 
-Feed Types
+ - **Feed Types**
+	 - Feed
+	 - Slideshow
+	 - Custom
 
- - Feed
- - Slideshow
- - Custom
+ - **Options**
+	 - Plugin Options
+	 - Feed Options
+	 - Slideshow Options
 
-Options
+ - **Events**
 
- - Plugin Options
- - Feed Options
- - Slideshow Options
- - Custom
-
-Events
-
- - Plugin Events
- - Feed Events
- - Slideshow Events
- - Custom
+	 - Plugin Events
+	 - Feed Events
+	 - Slideshow Events
 
 **Style Guide**
+	
+ - themes
+ - components
+ - custom
+ - sass guide
+
+#Creating your first feed in SocialChomp
