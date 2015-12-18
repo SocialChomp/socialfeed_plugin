@@ -11,7 +11,15 @@ Social Chomp aggregates social media content from searches and hashtags. Pulling
 	});
 **Requirements**
 
+ - moment.js (handles feed time references) 
+ - lodash.js (handles JSON
+ - pace.js (preloader) 
+ - freetile.js (feed tiling only required in feed mode.)
+
+
+
 **API Reference**
+
 Feed Types
 
  - Feed
@@ -20,12 +28,16 @@ Feed Types
 
 Options
 
+ - Plugin Options
  - Feed Options
  - Slideshow Options
  - Custom
 
 Events
 
+ - Plugin Events
  - Feed Events
  - Slideshow Events
  - Custom
+
+**Style Guide**

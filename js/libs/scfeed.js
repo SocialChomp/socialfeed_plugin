@@ -108,8 +108,7 @@ var scFeed = function(method){
 			                });
 			                methods.settings.container.find(".wrapper").freetile();
 						}, 200);
-					});
-					
+					});	
 	            },
 	            error: function(response, error){
 	            	console.log(response.statusText);
