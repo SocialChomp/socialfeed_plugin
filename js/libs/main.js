@@ -16,11 +16,7 @@ $(function() {//start doing cool shit here
 		feedOptions:{
 			filter: true,
 			infinity:true,
-			includeProperties:['image','created'],
+			excludeProperties:['image','created','handle'],
 		}
 	});
-	/*fda stuff
-	fdaFeed();*/
-	//$(".cover-image").css({'min-height':window.innerHeight-100});
-	//$(".cover-one").backstretch("images/bgh1.jpg");
 });//END APP
