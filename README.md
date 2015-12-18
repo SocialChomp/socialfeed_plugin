@@ -19,7 +19,7 @@ Social Chomp aggregates social media content from searches and hashtags. Pulling
 
 **Installation**
 
- - [Creating your first feed in SocialChomp.](#Creating-your-first-feed-in-SocialChomp)
+ - [Creating your first feed in SocialChomp.](https://github.com/SocialChomp/socialfeed_plugin#creating-your-first-feed-in-socialchomp)
  - Creating the JSON feed.
  - Adding custom feed to your own website.
 
