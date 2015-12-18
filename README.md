@@ -1,4 +1,5 @@
 # Social Feed Plugin
+![enter image description here](https://lh3.googleusercontent.com/-P87pjQtgxb4/VnPMOzPK8KI/AAAAAAAADyA/b1K_iZ_Zb5M/s500/Screen+Shot+2015-12-18+at+4.04.16+AM.png "socialchomp feed")
 Jquery Plugin that creates a social media feed from the SocialChomp JSON output. It aggregates and combines Facebook, Twitter, LinkedIn, YouTube, Instagram, Pinterest and creates multiple layouts.
 
 Social Chomp aggregates social media content from searches and hashtags. Pulling together all public content related to a tag.

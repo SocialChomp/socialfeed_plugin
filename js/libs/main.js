@@ -16,7 +16,7 @@ $(function() {//start doing cool shit here
 		feedOptions:{
 			filter: true,
 			infinity:true,
-			excludeProperties:['image','created','handle'],
+			includeProperties:['image'],
 		}
 	});
 });//END APP
