@@ -57,3 +57,5 @@ Social Chomp aggregates social media content from searches and hashtags. Pulling
 	 - ![enter image description here](https://lh3.googleusercontent.com/-89_PaF8HD_4/VnPXCVbwA7I/AAAAAAAADyU/JzFYxfviOV8/s500/Screen+Shot+2015-12-18+at+4.46.40+AM.png "Add profiles") 
  - In the navigation hover over Streams then click create stream.
 	 -  ![enter image description here](https://lh3.googleusercontent.com/-sP44cqTjFrI/VnPY0BLuhII/AAAAAAAADyk/Dv23vCRa-24/s500/Screen+Shot+2015-12-18+at+4.53.29+AM.png "Create Stream")
+ - All free accounts are public streams but enable the embed to use the plugins available.
+	 - ![enter image description here](https://lh3.googleusercontent.com/-tU8UYKoH2sc/VnRalxyB3lI/AAAAAAAADy8/ov7hudt3S9c/s500/Screen+Shot+2015-12-18+at+2.09.02+PM.png "embed")
