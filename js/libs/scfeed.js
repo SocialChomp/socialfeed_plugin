@@ -5,6 +5,36 @@ var scFeed = function(method){
     	return this.indexOf(obj) > -1;
 	};
 	var methods = {
+		feedOptions: {
+			//load limit the number of items to display every load
+			limit:200,
+			//display limit the number of items to display while scrolling
+			dLimit:20,
+			//tabs that allow you to filter out networks different from exclusion
+			filter: true,
+			//does this use infinity scrolling
+			infinity:true,
+			//should images open in a pop-up modal when clicked
+			modal:false,
+			//Set the number of columns per device
+			desktopColumns:4,
+			tabletColumns:3,
+			mobileColumns:3,
+			//Choose to only display one property or exlcude any properties.
+			/*PROPERTIES image,profile image, handle,description*/
+			excludeProperties:[],
+			includeProperties:[],
+			totalItems:null
+		},
+		custom: function(){},
+		slideshowOptions: {
+			//Choose to only display one network or exlcude any networks. 
+			//excludeNetworks:[],
+			//includeNetworks:[],
+			//Choose to only display one property or exlcude any properties.
+			excludeProperties:[],
+			includeProperties:[],
+		},
 		settings: {
 			url:'',
 			container:$(".scfeed"),
@@ -12,36 +42,8 @@ var scFeed = function(method){
 			type:'feed',
 			hasTitle:true,
 			hasCover:true,
-			title:'',
-			coverUrl:'',
-			custom: function(){},
-			feedOptions: {
-				//tabs that allow you to filter out networks different from exclusion
-				filter: true,
-				//does this use infinity scrolling
-				infinity:true,
-				//should images open in a pop-up modal when clicked
-				modal:false,
-				//Set the number of columns per device
-				desktopColumns:4,
-				tabletColumns:3,
-				mobileColumns:3,
-				//Choose to only display one network or exlcude any networks. 
-				//excludeNetworks:[],
-				//includeNetworks:[],
-				//Choose to only display one property or exlcude any properties.
-				/*PROPERTIES image,profile image, handle,description*/
-				excludeProperties:[],
-				includeProperties:[],
-			},
-			slideshowOptions: {
-				//Choose to only display one network or exlcude any networks. 
-				//excludeNetworks:[],
-				//includeNetworks:[],
-				//Choose to only display one property or exlcude any properties.
-				excludeProperties:[],
-				includeProperties:[],
-			}
+			title:null,
+			coverUrl:null,
 		},
 		//START PUBLIC METHODS HERE
         init : function(options) {
@@ -60,64 +62,55 @@ var scFeed = function(method){
     		}
 		},
 		//Feed type generates a feed and uses feedOptions for customizing.
-		feed: function(options){
-			methods.settings.feedOptions = $.extend(methods.settings.feedOptions, options);
-			$.ajax({
-	            url:methods.settings.url+'&page=1'
-	            ,type : "GET"
-	            ,dataType : "json"
-	            ,success: function (json) {
-	            	console.log(json);
-	            	//INT the feed
-	            	var html="";
-        			if(methods.settings.hasCover){
-			        	html +='<div class="row"><img src="'+json.stream.image+'" class="cover-img"/></div>';		
-        			}
-        			if(methods.settings.hasTitle){
-			        	html +='<div class="row"><h1 class="feed-title">'+json.stream.title+'</h1></div>';		
-        			}
-	            	if(methods.settings.feedOptions.filter){
-			        	html +=privacy.settings.getNetworks();			
-        			}
-	         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'">\
-	         		<div class="overlay"></div>\
-	         		<div class="wrapper">';
-	                /*Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.*/
-	                html +=privacy.settings.feeder(json);
-	                html +='</div></div>'
-	                //add the feed to the container div
-	                methods.settings.container.append(html);
-	                privacy.settings.updateNetworks();
-	                //settings based on infinity
-	                privacy.settings.returnLoader();
-	                //The width controls how many columns to display
-	                $('.'+methods.settings.type+'-item').css({
-	                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
-	                });
-	                $('.'+methods.settings.type+'-item img').error(function(){
-	                	$(this).after("<div class='img-error'></div>").remove();
-	                });
-	                methods.settings.container.find(".wrapper").freetile();
-	                //When a user finish resizing the window check to see if the columns are displaying properly
-	                var timer;
-					$(window).bind('resize', function() {
-				  		clearTimeout(timer);
-				  		timer = setTimeout(function(){ 
-					  		$('.'+methods.settings.type+'-item').css({
-			                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
-			                });
-			                methods.settings.container.find(".wrapper").freetile();
-						}, 200);
-					});	
-	            },
-	            error: function(response, error){
-	            	console.log(response.statusText);
-	            }
-			});	
+		feed: function(settings,options){
+			methods.feedOptions = $.extend(methods.feedOptions, options);
+			scStore.getStream(methods.feedOptions.dLimit, function(json){
+				console.log(json);
+				var html="";
+	        			if(methods.settings.hasCover){
+				        	html +='<div class="row"><img src="'+json.stream.image+'" class="cover-img"/></div>';		
+	        			}
+	        			if(methods.settings.hasTitle){
+				        	html +='<div class="row"><h1 class="feed-title">'+json.stream.title+'</h1></div>';		
+	        			}
+		            	if(methods.feedOptions.filter){
+				        	html +=privacy.settings.getNetworks();			
+	        			}
+		         		html +='<div class="'+methods.settings.type+' '+methods.settings.theme+'">\
+		         		<div class="overlay"></div>\
+		         		<div class="wrapper">';
+		                //Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.
+		                html +=privacy.settings.feeder(json);
+		                html +='</div></div>'
+		                //add the feed to the container div
+		                methods.settings.container.append(html);
+		                privacy.settings.updateNetworks();
+		                //settings based on infinity
+		                privacy.settings.returnLoader();
+		                //The width controls how many columns to display
+		                $('.'+methods.settings.type+'-item').css({
+		                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
+		                });
+		                $('.'+methods.settings.type+'-item img').error(function(){
+		                	$(this).after("<div class='img-error'></div>").remove();
+		                });
+		                methods.settings.container.find(".wrapper").freetile();
+		                //When a user finish resizing the window check to see if the columns are displaying properly
+		                var timer;
+						$(window).bind('resize', function() {
+					  		clearTimeout(timer);
+					  		timer = setTimeout(function(){ 
+						  		$('.'+methods.settings.type+'-item').css({
+				                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
+				                });
+				                methods.settings.container.find(".wrapper").freetile();
+							}, 200);
+						});	
+			});
 		},
 		//Slideshow type generates a feed and uses slideshowOptions for customizing.
 		slideshow: function(options){
-			methods.settings.slideshowOptions = $.extend(methods.settings.slideshowOptions, options);
+			methods.slideshowOptions = $.extend(methods.slideshowOptions, options);
 		},
 		custom: function(options){
 			$.ajax({
@@ -165,23 +158,23 @@ var scFeed = function(method){
 	    			return false;
 	    		}
 			},
-			/* DeviceColumn- is checking the size of the window. When it changes the function then returns the number of columns based on the size of the window. */
+			/*DeviceColumn- is checking the size of the window. When it changes the function then returns the number of columns based on the size of the window. */
 			deviceColumn: function(){
 				if($(window).width()>=1025){
 					//console.log('desktop');
-					return methods.settings.feedOptions.desktopColumns;
+					return methods.feedOptions.desktopColumns;
 				}else if($(window).width()<=1024 && $(window).width()>=751){
 					//console.log('tablet');
 					return methods.settings.feedOptions.tabletColumns;
 				}else if($(window).width()<=750){
 					//console.log('mobile');
-					if(methods.settings.container.width()<=600 && methods.settings.feedOptions.mobileColumns >= 3){
+					if(methods.settings.container.width()<=600 && methods.feedOptions.mobileColumns >= 3){
 						if(methods.settings.container.width()<=400){
 							return 1;
 						}else{
 							return 2;
 						}
-					}else{return methods.settings.feedOptions.mobileColumns;}
+					}else{return methods.feedOptions.mobileColumns;}
 				}
 			},
 			/*MeasureWindow- check the container position in the window and run the append function*/
@@ -192,7 +185,7 @@ var scFeed = function(method){
 			},
 			/*ReturnLoader- checks the setting of the inifity and will return either a button or run a scroll script */
 			returnLoader: function(){
-				if(methods.settings.feedOptions.infinity){
+				if(methods.feedOptions.infinity){
 					$(window).bind('scroll', function() {
 						privacy.settings.measureWindow();
 					});
@@ -207,39 +200,26 @@ var scFeed = function(method){
 			/*AppendFeedItems- runs the ajax call of the url and returns the html from the feeder. Then appends that data to the container wrapper that holds the feed. Also tracks the number of items in the json response until it recognizes the last page.*/
 			appendFeedItems: function(){
 				if(!privacy.settings.requestInProcess){
-					if(!privacy.settings.lastPage){
-						console.log('loading content');
-						privacy.settings.requestInProcess = true;
-						$.ajax({
-				            url:methods.settings.url+'&page='+privacy.settings.page
-				            ,type : "GET"
-				            ,dataType : "json"
-				            ,success: function (json) {
-				            	privacy.settings.page++;
-				            	$('.feed.light .wrapper').append(privacy.settings.feeder(json));
-				         		$('.'+methods.settings.type+'-item').css({
-				                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
-				                });
-				                $('.'+methods.settings.type+'-item img').error(function(){
-				                	$(this).after("<div class='img-error'></div>").remove();
-				                });
-				         		methods.settings.container.find(".wrapper").freetile();
-				         		privacy.settings.requestInProcess = false;
-				            	if(json.items.length<25){
-				            		privacy.settings.lastPage = true;
-				            	}
-				            }
-				        });
-					}else{
-						console.log('all content has loaded');
-					}
+					//console.log('loading content');
+					privacy.settings.requestInProcess = true;
+					scStore.getStream(methods.feedOptions.dLimit, function(json){
+						$('.feed.light .wrapper').append(privacy.settings.feeder(json));
+		         		$('.'+methods.settings.type+'-item').css({
+		                	'width': methods.settings.container.find(".wrapper").width()/privacy.settings.deviceColumn()-10+'px'
+		                });
+		                $('.'+methods.settings.type+'-item img').error(function(){
+		                	$(this).after("<div class='img-error'></div>").remove();
+		                });
+		         		methods.settings.container.find(".wrapper").freetile();
+		         		privacy.settings.requestInProcess = false;
+					});
 				}
 			},
 			/*FilterData- returns Ojbects and arrays of the ajax data based on the inclusions and exclusions*/
 			filterData: function(data){
-				//console.log(methods.settings.feedOptions.includeProperties.length);
-				if(methods.settings.feedOptions.excludeProperties && !methods.settings.feedOptions.includeProperties){
-					if(methods.settings.feedOptions.excludeProperties.length>=1){
+				//console.log(methods.feedOptions.includeProperties.length);
+				if(methods.feedOptions.excludeProperties && !methods.feedOptions.includeProperties){
+					if(methods.feedOptions.excludeProperties.length>=1){
 						//console.log("excludeProperties");
 						data.items.forEach(function(n){
 							methods.settings.feedOptions.excludeProperties.forEach(function(exclude){
@@ -247,12 +227,12 @@ var scFeed = function(method){
 							});
 						});
 					}
-				}else if(methods.settings.feedOptions.includeProperties && !methods.settings.feedOptions.excludeProperties){
-					if(methods.settings.feedOptions.includeProperties.length>=1){
+				}else if(methods.feedOptions.includeProperties && !methods.feedOptions.excludeProperties){
+					if(methods.feedOptions.includeProperties.length>=1){
 						//console.log("includeProperties");
 						data.items.forEach(function(n){
 							for(var i in n){
-								if (methods.settings.feedOptions.includeProperties.indexOf(i) > -1) {
+								if (methods.feedOptions.includeProperties.indexOf(i) > -1) {
 										
 								}else if(i!=="network" && i!=="social_link"){
 									delete n[i];
@@ -260,10 +240,10 @@ var scFeed = function(method){
 							}
 						});
 					}
-				}else if(methods.settings.feedOptions.excludeProperties && methods.settings.feedOptions.includeProperties){
-						if(methods.settings.feedOptions.includeProperties.length>=1 && methods.settings.feedOptions.excludeProperties.length>=1){
+				}else if(methods.feedOptions.excludeProperties && methods.feedOptions.includeProperties){
+						if(methods.feedOptions.includeProperties.length>=1 && methods.feedOptions.excludeProperties.length>=1){
 							$.error( 'You can not use both includeProperties and excludeProperties.');
-							if(_.xor(methods.settings.feedOptions.excludeProperties,methods.settings.feedOptions.includeProperties).length===0){
+							if(_.xor(methods.feedOptions.excludeProperties,methods.feedOptions.includeProperties).length===0){
 								$.error( 'excludeProperties can not contain the same value as includeProperties');
 							}
 						}
@@ -334,7 +314,6 @@ var scFeed = function(method){
 			/*Feeder- the html of each item in the feed*/
 			feeder: function(data,custom){
 				var json = privacy.settings.filterData(data);
-				//console.log(json);
 				var html='';
 				for(var i =1; i< json.items.length;i++){
 					if(json.items[i].image ||(!json.items[i].image && json.items[i].description)){
@@ -465,6 +444,63 @@ var scFeed = function(method){
 			}
 		},
 	};
+	//Handles the storage of data
+	var scStore= {
+		items:[],
+		stream:{},
+		page:1,
+		itemCount:0,
+		/* GetData- returns a limited number of items from the array. The number of items returned is based on the limit.*/
+		getData:function(limit){
+			var data = {
+				items: scStore.items.splice(0,limit),
+				stream:scStore.stream
+			};
+			return data;
+		},
+		//endStream checks to see if there is no more ajax content to be loaded if all content is loaded this is true.
+		endStream:false,
+		/* PullStream- Determines if its time to pull a new ajax request. or init the first request and returns updates on the callback when the ajax call is finish. If there is no more data to be pulled it will end the stream*/
+		pullStream:function(p,callback){
+			if((!scStore.endStream && scStore.itemCount>=scStore.items.length)||scStore.page==1){
+				scStore.itemCount=0;
+				$.ajax({
+		            url:methods.settings.url+'&page='+p+'&limit='+methods.feedOptions.limit
+		            ,type : "GET"
+		            ,dataType : "json"
+		            ,success: function (json) {
+		            	scStore.items =scStore.items.concat(json.items);
+		            	scStore.stream = json.stream;
+		            	scStore.page++;
+		            	if(json.items.length<25){
+		            		scStore.endStream==true;
+		            	}
+		            	callback();
+		            },
+		            error: function(response, error){
+		            	console.log(response.statusText);
+		            }
+				});
+			}else{
+				console.log("just give them more items");
+				callback();
+			}
+		},
+		/* GetStream- Returns a object with a limted set of data from items and the stream object. When the content is ready it passes a callback with the object.*/
+		getStream:function(l,callback){
+			if(scStore.endStream==false){
+				scStore.pullStream(scStore.page,function(){
+					var data =scStore.getData(l);
+					scStore.itemCount += data.items.length;
+					callback(data);
+				});
+			}else if(scStore.endStream){
+				//console.log("after slice");
+			}else{
+				//console.log("after slice");
+			}
+		}
+	}
 	//SET METHODS AND SETTINGS
 	if (methods[method]) {
         return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
