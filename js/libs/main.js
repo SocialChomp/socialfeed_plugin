@@ -13,10 +13,16 @@ $(function() {//start doing cool shit here
 	//SocialChomp Feed
 	scFeed({
 		url:'https://api.socialchomp.com/s/55cf690b29b0cae564e87f65?apiKey=ed6336508a42f877644bc86381aedef2a5a1d66e',
+		hasCover:true,
+		hasTitle:true,
 		feedOptions:{
 			filter: true,
 			infinity:true,
 			includeProperties:['image'],
+			modal:true,
+			desktopColumns:3,
+			tabletColumns:2,
+			mobileColumns:1
 		}
 	});
 });//END APP

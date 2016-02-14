@@ -53,7 +53,7 @@ var scFeed = function(method){
     			$.error('Please Check your Url.');
     		}else{
     			if(methods.settings.type==='feed'){
-    				methods.feed();
+    				methods.feed(methods.settings, options.feedOptions);
     			}else if(methods.settings.type==='slideshow'){
     				methods.slideshow();
     			}else if(methods.settings.type==='custom'){
@@ -63,6 +63,8 @@ var scFeed = function(method){
 		},
 		//Feed type generates a feed and uses feedOptions for customizing.
 		feed: function(settings,options){
+			console.log(methods.feedOptions);
+			console.log(options);
 			methods.feedOptions = $.extend(methods.feedOptions, options);
 			scStore.getStream(methods.feedOptions.dLimit, function(json){
 				console.log(json);
