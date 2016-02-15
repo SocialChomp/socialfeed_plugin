@@ -15,6 +15,7 @@ $(function() {//start doing cool shit here
 		url:'https://api.socialchomp.com/s/55cf690b29b0cae564e87f65?apiKey=ed6336508a42f877644bc86381aedef2a5a1d66e',
 		hasCover:true,
 		hasTitle:true,
+		type:'slideshow',
 		feedOptions:{
 			filter: true,
 			infinity:false,

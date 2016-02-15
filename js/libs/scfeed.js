@@ -55,9 +55,9 @@ var scFeed = function(method){
     			if(methods.settings.type==='feed'){
     				methods.feed(methods.settings, options.feedOptions);
     			}else if(methods.settings.type==='slideshow'){
-    				methods.slideshow();
+    				methods.slideshow(methods.settings, options.feedOptions);
     			}else if(methods.settings.type==='custom'){
-    				methods.custom();
+    				methods.custom(methods.settings, options.feedOptions);
     			}
     		}
 		},
@@ -65,10 +65,7 @@ var scFeed = function(method){
 		feed: function(settings,options){
 			
 			methods.feedOptions = $.extend(methods.feedOptions, options);
-			scStore.getStream(methods.feedOptions.dLimit, function(json){
-
-				console.log(json);
-			
+			scStore.getStream(methods.feedOptions.dLimit, function(json){			
 
 				var html="";
 	        			if(methods.settings.hasCover){
@@ -88,15 +85,9 @@ var scFeed = function(method){
 		                html +='</div></div>';
 		                //add the feed to the container div
 		                methods.settings.container.append(html);
-		                console.log(scStore.items);
-		                console.log(scStore.getData(methods.feedOptions.limit).items);
 		                $('.image-hold img').click(function(){
-		                	console.log(this.getAttribute('index')); 
-		                	console.log(parseInt(this.getAttribute('index')) + 1);
 		                	var gallery = blueimp.Gallery(json.items, {useBootstrapModal:false, index:parseInt(this.getAttribute('index'))});
-		                	console.log('Gallery Index ' + gallery.getIndex());
-		                	//gallery.slide(parseInt(this.getAttribute('index') + 1)); 
-		                	console.log(' Gallery Post ' + gallery.getIndex());
+		                	
 		                });
 		                privacy.settings.updateNetworks();
 		                //settings based on infinity
@@ -125,6 +116,12 @@ var scFeed = function(method){
 		//Slideshow type generates a feed and uses slideshowOptions for customizing.
 		slideshow: function(options){
 			methods.slideshowOptions = $.extend(methods.slideshowOptions, options);
+
+			scStore.getStream(methods.feedOptions.dLimit, function(json){
+
+			var gallery = blueimp.Gallery(json.items, {useBootstrapModal:false});
+
+		    });
 		},
 		custom: function(options){
 			$.ajax({
