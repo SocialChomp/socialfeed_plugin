@@ -17,8 +17,7 @@ $(function() {//start doing cool shit here
 		hasTitle:true,
 		feedOptions:{
 			filter: true,
-			infinity:true,
-			includeProperties:['image'],
+			infinity:false,
 			modal:true,
 			desktopColumns:3,
 			tabletColumns:2,

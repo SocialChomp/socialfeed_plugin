@@ -18,7 +18,7 @@
 	//@include drop-shadow();
 	background: #fff;
 	.row:first-child{padding:0px;}
-	.row{padding:5px;}
+	.row{padding:5px;margin:0;}
 	a{color:darken(#00E6E6,30%); @include transition(all 300ms);}
 	a:hover{color:#00E6E6;}
 }

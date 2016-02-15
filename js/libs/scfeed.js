@@ -63,11 +63,13 @@ var scFeed = function(method){
 		},
 		//Feed type generates a feed and uses feedOptions for customizing.
 		feed: function(settings,options){
-			console.log(methods.feedOptions);
-			console.log(options);
+			
 			methods.feedOptions = $.extend(methods.feedOptions, options);
 			scStore.getStream(methods.feedOptions.dLimit, function(json){
+
 				console.log(json);
+			
+
 				var html="";
 	        			if(methods.settings.hasCover){
 				        	html +='<div class="row"><img src="'+json.stream.image+'" class="cover-img"/></div>';		
@@ -83,9 +85,19 @@ var scFeed = function(method){
 		         		<div class="wrapper">';
 		                //Run json retun through the feeder and it will return the html based on exclusion and inclusion rules.
 		                html +=privacy.settings.feeder(json);
-		                html +='</div></div>'
+		                html +='</div></div>';
 		                //add the feed to the container div
 		                methods.settings.container.append(html);
+		                console.log(scStore.items);
+		                console.log(scStore.getData(methods.feedOptions.limit).items);
+		                $('.image-hold img').click(function(){
+		                	console.log(this.getAttribute('index')); 
+		                	console.log(parseInt(this.getAttribute('index')) + 1);
+		                	var gallery = blueimp.Gallery(json.items, {useBootstrapModal:false, index:parseInt(this.getAttribute('index'))});
+		                	console.log('Gallery Index ' + gallery.getIndex());
+		                	//gallery.slide(parseInt(this.getAttribute('index') + 1)); 
+		                	console.log(' Gallery Post ' + gallery.getIndex());
+		                });
 		                privacy.settings.updateNetworks();
 		                //settings based on infinity
 		                privacy.settings.returnLoader();
@@ -317,7 +329,8 @@ var scFeed = function(method){
 			feeder: function(data,custom){
 				var json = privacy.settings.filterData(data);
 				var html='';
-				for(var i =1; i< json.items.length;i++){
+				for(var i =0; i< json.items.length;i++){
+					
 					if(json.items[i].image ||(!json.items[i].image && json.items[i].description)){
 		        		html += '<div class="'+json.items[i].network+' '+methods.settings.type+'-item '+privacy.settings.filterByNetwork(json.items[i].network)+'">';
 		        			//If a item has an image url go ahead and add markup. 
@@ -325,7 +338,7 @@ var scFeed = function(method){
 		        				html += '<div class="row">\
 		        							<div class="'+json.items[i].network+' image-wrap">\
 		        								<div class="image-hold">\
-		        									<img src="'+json.items[i].image+'" alt=""/>\
+		        									<img index="' + json.items[i].index + '" src="'+json.items[i].image+'" alt=""/>\
 		        								</div>\
 		        							</div>\
 		        						</div>';
@@ -388,7 +401,7 @@ var scFeed = function(method){
 			},
 			/*GetNetwork- Container div for the filter option*/
 			getNetworks: function(){
-				console.log("getting networks");
+				
 				var html="<div class='filter-items'><div class='filter-wrap'></div><!--<div class'row'><p class='filter-by'> Filter Content by Social Media Buttons</p></div>--></div>";
 				return html;
 			},
@@ -471,6 +484,8 @@ var scFeed = function(method){
 		            ,type : "GET"
 		            ,dataType : "json"
 		            ,success: function (json) {
+		            	for(var i =1; i< json.items.length;i++)
+		            		json.items[i].href = json.items[i].image;
 		            	scStore.items =scStore.items.concat(json.items);
 		            	scStore.stream = json.stream;
 		            	scStore.page++;
